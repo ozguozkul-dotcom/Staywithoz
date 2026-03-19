@@ -7,7 +7,22 @@
 body { font-family: Arial; padding:20px; background:#f2f2f2; }
 .card { background:white; padding:20px; border-radius:15px; margin-bottom:15px; }
 img { width:100%; border-radius:15px; margin-bottom:10px; }
+.section-title { cursor: pointer; user-select: none; padding: 10px; background: #f9f9f9; border-radius: 8px; transition: 0.3s; display: flex; align-items: center; }
+.section-title:hover { background: #e8e8e8; }
+.arrow { margin-right: 8px; font-weight: bold; }
+.section-content { display: none; padding-top: 10px; }
+.section-content.active { display: block; }
+.section-content ul { margin: 10px 0; padding-left: 20px; }
+.section-content li { margin: 8px 0; line-height: 1.6; }
 </style>
+<script>
+function toggleSection(element) {
+  const content = element.nextElementSibling;
+  content.classList.toggle('active');
+  const arrow = element.querySelector('.arrow');
+  arrow.textContent = content.classList.contains('active') ? '▼' : '▶';
+}
+</script>
 </head>
 
 <body>
@@ -38,15 +53,17 @@ img { width:100%; border-radius:15px; margin-bottom:10px; }
 <img src="su.jpg">
 <p>Şofbeni açmayı unutmayınız.</p>
 
-<h3>🧹 Evden Çıkış</h3>
+<h3 class="section-title" onclick="toggleSection(this)"><span class="arrow">▶</span> 🚪 Evden Çıkış</h3>
 <img src="temizlik.jpg">
-<p>Evi düzenli bırakmanız rica olunur.
-          
-  Kullandığınız Havluları lütfen yere atınız
-          
-  Lütfen klima ve ışıkları evden ayrılırken kapatınız.
-          
-  Kullanılan çarşafları söküp yere bırakırsanız seviniriz. </p>
+<div class="section-content">
+<p><strong>Lütfen aşağıdaki adımları takip ediniz:</strong></p>
+<ul>
+<li>Evi düzenli bırakmanız rica olunur</li>
+<li>Kullandığınız havluları lütfen yere yerleştiriniz</li>
+<li>Lütfen klima ve ışıkları evden ayrılırken kapatınız</li>
+<li>Kullanılan çarşafları söküp yere bırakırsanız seviniriz</li>
+</ul>
+</div>
 
 </div>
 
