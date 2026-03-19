@@ -1,69 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>StayWithOz</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <style>
-    body { font-family: Arial; margin:0; background:#f2f2f2; }
-<div style="background:#111; padding:15px; text-align:center; border-radius:10px;">
-  <a href="index.html" style="color:white; margin:15px; font-weight:bold;">🏠 Ana Sayfa</a>
-  <a href="ev1.html" style="color:white; margin:15px; font-weight:bold;">🏡 Ev 1</a>
-  <a href="ev2.html" style="color:white; margin:15px; font-weight:bold;">🏡 Ev 2</a>
-</div>
-    .header {
-      background:black; color:white;
-      padding:15px; text-align:center;
-    }
-
-    .menu {
-      display:flex;
-      justify-content:center;
-      gap:20px;
-      background:#333;
-      padding:10px;
-    }
-
-    .menu a {
-      color:white;
-      text-decoration:none;
-      font-weight:bold;
-    }
-
-    .container { padding:20px; }
-
-    .card {
-      background:white;
-      padding:20px;
-      border-radius:15px;
-      margin-bottom:20px;
-    }
-
-    img {
-      width:100%;
-      border-radius:15px;
-    }
-  </style>
+<title>StayWithOz</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body { font-family: Arial; margin:0; background:#f2f2f2; }
+.header { background:black; color:white; padding:15px; text-align:center; }
+.menu { display:flex; flex-wrap:wrap; justify-content:center; background:#333; padding:10px; }
+.menu a { color:white; margin:10px; text-decoration:none; font-weight:bold; }
+.card { background:white; margin:15px; padding:20px; border-radius:15px; }
+</style>
 </head>
 
 <body>
 
 <div class="header">
-  <h1>🏡 StayWithOz</h1>
+<h1>🏡 StayWithOz</h1>
 </div>
 
 <div class="menu">
-  <a href="ev1.html">Ev 1</a>
-  <a href="ev2.html">Ev 2</a>
+<a href="dereboyu.html">Dereboyu Daire 1</a>
+<a href="kervansaray.html">Kervansaray Daire</a>
+<a href="#kibris">Kıbrıs’ta Görülecek Yerler</a>
 </div>
 
-<div class="container">
-
-  <div class="card">
-    <h2>Welcome</h2>
-    <p>Select your apartment above 👆</p>
-  </div>
-
+<div class="card" id="kibris">
+<h2>📍 Kıbrıs’ta Görülecek Yerler</h2>
+<p>• Girne Kalesi</p>
+<p>• Bellapais Manastırı</p>
+<p>• Lefkoşa Surlariçi</p>
+<p>• Kervansaray Plajı</p>
 </div>
 
 </body>
