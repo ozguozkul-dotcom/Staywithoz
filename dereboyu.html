@@ -238,6 +238,25 @@
       margin: 10px 0 0;
       text-align: center;
     }
+
+    .smallImagesContainer{
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin: 12px 0;
+      flex-wrap: wrap;
+    }
+    .smallImage{
+      max-width: 100px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+    }
+    .smallImage img{
+      display: block;
+      width: 100%;
+      height: auto;
+    }
   </style>
 </head>
 
@@ -304,6 +323,18 @@
               </span>
             </li>
           </ul>
+
+          <div class="smallImagesContainer">
+            <div class="smallImage">
+              <img src="su.jpg" alt="Sıcak su fişi">
+            </div>
+            <div class="smallImage">
+              <img src="kapi.jpg" alt="Daire kapısı">
+            </div>
+            <div class="smallImage">
+              <img src="dereboyumain2.jpg" alt="Dereboyu görsel">
+            </div>
+          </div>
 
           <div class="note">
             <b>Asansör notu:</b> Maalesef asansörümüz şu an için çalışmamaktadır. Bunun için özür dileriz.
