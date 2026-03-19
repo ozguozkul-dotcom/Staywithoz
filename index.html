@@ -3,35 +3,63 @@
 <head>
   <title>StayWithOz</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
-    body { font-family: Arial; padding: 20px; background:#f2f2f2; }
-    .card { background:white; padding:20px; border-radius:15px; margin-bottom:15px; }
+    body { font-family: Arial; margin:0; background:#f2f2f2; }
+
+    .header {
+      background:black; color:white;
+      padding:15px; text-align:center;
+    }
+
+    .menu {
+      display:flex;
+      justify-content:center;
+      gap:20px;
+      background:#333;
+      padding:10px;
+    }
+
+    .menu a {
+      color:white;
+      text-decoration:none;
+      font-weight:bold;
+    }
+
+    .container { padding:20px; }
+
+    .card {
+      background:white;
+      padding:20px;
+      border-radius:15px;
+      margin-bottom:20px;
+    }
+
+    img {
+      width:100%;
+      border-radius:15px;
+    }
   </style>
 </head>
+
 <body>
 
-<h1>🏡 Welcome to StayWithOz</h1>
-
-<div class="card">
-<h2>📶 WiFi</h2>
-<p>Name: YOUR_WIFI</p>
-<p>Password: 12345678</p>
+<div class="header">
+  <h1>🏡 StayWithOz</h1>
 </div>
 
-<div class="card">
-<h2>📜 House Rules</h2>
-<p>- No smoking</p>
-<p>- Quiet after 23:00</p>
+<div class="menu">
+  <a href="ev1.html">Ev 1</a>
+  <a href="ev2.html">Ev 2</a>
 </div>
 
-<div class="card">
-<h2>⏰ Check-out</h2>
-<p>11:00 AM</p>
-</div>
+<div class="container">
 
-<div class="card">
-<h2>📞 Contact</h2>
-<p>+90 XXX XXX XX XX</p>
+  <div class="card">
+    <h2>Welcome</h2>
+    <p>Select your apartment above 👆</p>
+  </div>
+
 </div>
 
 </body>
