@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Dereboyu Image Gallery - Interactive slideshow featuring beautiful images">
-    <title>Dereboyu Slideshow | Image Gallery</title>
+    <meta name="description" content="Dereboyu - Heart of Nicosia. Discover beautiful images and information about this historic location in Cyprus.">
+    <title>Dereboyu - Heart of Nicosia | StaywithOZ</title>
     <style>
         * {
             margin: 0;
@@ -13,23 +13,80 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f5f5f5;
+            font-family: 'Arial', sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        .header {
+            background-color: black;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 10px 0;
+        }
+
+        .menu {
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            background-color: #333;
+            padding: 10px;
+        }
+
+        .menu a {
+            color: white;
+            margin: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .menu a:hover {
+            color: #ffd700;
+        }
+
+        .menu a.active {
+            color: #ffd700;
+            border-bottom: 2px solid #ffd700;
+        }
+
+        .content-container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: white;
+            margin: 15px 0;
             padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .card h2 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 10px;
         }
 
         .slideshow-container {
             position: relative;
-            max-width: 800px;
+            max-width: 100%;
             width: 100%;
             background-color: #000;
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            margin: 20px 0;
         }
 
         .slides-wrapper {
@@ -175,36 +232,69 @@
                 width: 10px;
                 height: 10px;
             }
+
+            .content-container {
+                padding: 0 10px;
+            }
         }
     </style>
 </head>
 <body>
 
-<div class="slideshow-container" role="region" aria-label="Image slideshow">
-    <div class="slides-wrapper">
-        <div class="mySlides active">
-            <img src="https://raw.githubusercontent.com/ozguozkul-dotcom/Staywithoz/main/dereboyumain.jpg" alt="Dereboyu landscape view - Slide 1" loading="lazy">
-        </div>
+<div class="header">
+    <h1>🏡 StaywithOZ</h1>
+</div>
 
-        <div class="mySlides">
-            <img src="https://raw.githubusercontent.com/ozguozkul-dotcom/Staywithoz/main/dereboyumain2.jpg" alt="Dereboyu scenic beauty - Slide 2" loading="lazy">
-        </div>
+<div class="menu">
+    <a href="index.html">Home</a>
+    <a href="dereboyu.html" class="active">Heart of Nicosia</a>
+    <a href="kervansaray.html">Cosy Flat Next to Beach</a>
+</div>
 
-        <div class="mySlides">
-            <img src="https://raw.githubusercontent.com/ozguozkul-dotcom/Staywithoz/main/dereboyumain3.jpg" alt="Dereboyu natural scenery - Slide 3" loading="lazy">
-        </div>
+<div class="content-container">
+    <div class="card">
+        <h2>🏛️ Dereboyu - Heart of Nicosia</h2>
+        <p>Welcome to Dereboyu, a stunning location in the heart of Nicosia. This historic area offers breathtaking views and a rich cultural experience that captures the essence of Cyprus.</p>
+        <p>Explore the beautiful images below to discover the charm and beauty of this exceptional destination.</p>
+    </div>
 
-        <button class="prev" aria-label="Previous slide" onclick="changeSlide(-1)">&#10094;</button>
-        <button class="next" aria-label="Next slide" onclick="changeSlide(1)">&#10095;</button>
+    <div class="slideshow-container" role="region" aria-label="Image slideshow">
+        <div class="slides-wrapper">
+            <div class="mySlides active">
+                <img src="https://raw.githubusercontent.com/ozguozkul-dotcom/Staywithoz/main/dereboyumain.jpg" alt="Dereboyu landscape view - Slide 1" loading="lazy">
+            </div>
 
-        <div class="controls">
-            <button class="play-pause-btn" id="playPauseBtn" aria-label="Play or pause slideshow" onclick="togglePlayPause()">Pause</button>
-            <div class="dots" role="tablist" aria-label="Slide navigation">
-                <button class="dot active" role="tab" aria-label="Go to slide 1" aria-selected="true" onclick="currentSlide(0)"></button>
-                <button class="dot" role="tab" aria-label="Go to slide 2" aria-selected="false" onclick="currentSlide(1)"></button>
-                <button class="dot" role="tab" aria-label="Go to slide 3" aria-selected="false" onclick="currentSlide(2)"></button>
+            <div class="mySlides">
+                <img src="https://raw.githubusercontent.com/ozguozkul-dotcom/Staywithoz/main/dereboyumain2.jpg" alt="Dereboyu scenic beauty - Slide 2" loading="lazy">
+            </div>
+
+            <div class="mySlides">
+                <img src="https://raw.githubusercontent.com/ozguozkul-dotcom/Staywithoz/main/dereboyumain3.jpg" alt="Dereboyu natural scenery - Slide 3" loading="lazy">
+            </div>
+
+            <button class="prev" aria-label="Previous slide" onclick="changeSlide(-1)">&#10094;</button>
+            <button class="next" aria-label="Next slide" onclick="changeSlide(1)">&#10095;</button>
+
+            <div class="controls">
+                <button class="play-pause-btn" id="playPauseBtn" aria-label="Play or pause slideshow" onclick="togglePlayPause()">Pause</button>
+                <div class="dots" role="tablist" aria-label="Slide navigation">
+                    <button class="dot active" role="tab" aria-label="Go to slide 1" aria-selected="true" onclick="currentSlide(0)"></button>
+                    <button class="dot" role="tab" aria-label="Go to slide 2" aria-selected="false" onclick="currentSlide(1)"></button>
+                    <button class="dot" role="tab" aria-label="Go to slide 3" aria-selected="false" onclick="currentSlide(2)"></button>
+                </div>
             </div>
         </div>
+    </div>
+
+    <div class="card">
+        <h2>📍 About This Location</h2>
+        <p>Dereboyu is known for its picturesque scenery and historic significance. Located in the heart of Nicosia, this destination attracts visitors from around the world who are seeking authentic cultural experiences.</p>
+        <p><strong>Best Time to Visit:</strong> Spring and Fall offer pleasant weather and stunning natural beauty.</p>
+        <p><strong>Things to Do:</strong></p>
+        <p>• Explore historic landmarks and architecture</p>
+        <p>• Enjoy local cuisine at traditional restaurants</p>
+        <p>• Take scenic photographs</p>
+        <p>• Experience authentic Cypriot culture</p>
     </div>
 </div>
 
