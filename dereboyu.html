@@ -3,83 +3,310 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Slideshow</title>
+    <meta name="description" content="Dereboyu Image Gallery - Interactive slideshow featuring beautiful images">
+    <title>Dereboyu Slideshow | Image Gallery</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
         .slideshow-container {
             position: relative;
-            max-width: 100%;
-            margin: auto;
+            max-width: 800px;
+            width: 100%;
+            background-color: #000;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
+
+        .slides-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 66.67%; /* 3:2 aspect ratio */
+        }
+
         .mySlides {
             display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            animation: fadeIn 0.5s;
         }
-        img {
-            width: 60%;
+
+        .mySlides.active {
             display: block;
-            margin: auto;
         }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
         .prev, .next {
             cursor: pointer;
             position: absolute;
             top: 50%;
+            transform: translateY(-50%);
             width: auto;
-            padding: 16px;
+            padding: 12px 16px;
             color: white;
             font-weight: bold;
-            font-size: 18px;
-            transition: 0.6s ease;
-            border-radius: 0 3px 3px 0;
+            font-size: 20px;
+            transition: background-color 0.3s ease, opacity 0.3s ease;
+            border-radius: 3px;
             user-select: none;
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            z-index: 10;
+            opacity: 0.7;
         }
-        .next {
-            right: 0;
-            border-radius: 3px 0 0 3px;
-        }
+
         .prev:hover, .next:hover {
-            background-color: rgba(0,0,0,0.8);
+            background-color: rgba(0, 0, 0, 0.8);
+            opacity: 1;
+        }
+
+        .prev:focus, .next:focus {
+            outline: 2px solid #fff;
+            outline-offset: 2px;
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+
+        .controls {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .play-pause-btn {
+            padding: 8px 12px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .play-pause-btn:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .play-pause-btn:focus {
+            outline: 2px solid #fff;
+            outline-offset: 2px;
+        }
+
+        .dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            cursor: pointer;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            border: none;
+            transition: background-color 0.3s ease;
+            padding: 0;
+        }
+
+        .dot.active {
+            background-color: #fff;
+        }
+
+        .dot:hover {
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .dot:focus {
+            outline: 2px solid #fff;
+            outline-offset: 2px;
+        }
+
+        @media (max-width: 600px) {
+            .prev, .next {
+                padding: 10px 12px;
+                font-size: 16px;
+            }
+
+            .controls {
+                bottom: 5px;
+            }
+
+            .dot {
+                width: 10px;
+                height: 10px;
+            }
         }
     </style>
 </head>
 <body>
 
-<div class="slideshow-container">
+<div class="slideshow-container" role="region" aria-label="Image slideshow">
+    <div class="slides-wrapper">
+        <div class="mySlides active">
+            <img src="dereboyumain.jpg" alt="Dereboyu landscape view - Slide 1" loading="lazy">
+        </div>
 
-    <div class="mySlides">
-        <img src="dereboyumain.jpg" alt="Slide 1">
+        <div class="mySlides">
+            <img src="dereboyumain2.jpg" alt="Dereboyu scenic beauty - Slide 2" loading="lazy">
+        </div>
+
+        <div class="mySlides">
+            <img src="dereboyumain3.jpg" alt="Dereboyu natural scenery - Slide 3" loading="lazy">
+        </div>
+
+        <button class="prev" aria-label="Previous slide" onclick="changeSlide(-1)">&#10094;</button>
+        <button class="next" aria-label="Next slide" onclick="changeSlide(1)">&#10095;</button>
+
+        <div class="controls">
+            <button class="play-pause-btn" id="playPauseBtn" aria-label="Play or pause slideshow" onclick="togglePlayPause()">Pause</button>
+            <div class="dots" role="tablist" aria-label="Slide navigation">
+                <button class="dot active" role="tab" aria-label="Go to slide 1" aria-selected="true" onclick="currentSlide(0)"></button>
+                <button class="dot" role="tab" aria-label="Go to slide 2" aria-selected="false" onclick="currentSlide(1)"></button>
+                <button class="dot" role="tab" aria-label="Go to slide 3" aria-selected="false" onclick="currentSlide(2)"></button>
+            </div>
+        </div>
     </div>
-
-    <div class="mySlides">
-        <img src="dereboyumain2.jpg" alt="Slide 2">
-    </div>
-
-    <div class="mySlides">
-        <img src="dereboyumain3.jpg" alt="Slide 3">
-    </div>
-
-    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-    <a class="next" onclick="plusSlides(1)">&#10095;</a>
-
 </div>
 
 <script>
-let slideIndex = 0;
-showSlides();
+    const slides = document.querySelectorAll('.mySlides');
+    const dots = document.querySelectorAll('.dot');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    
+    let slideIndex = 0;
+    let isPlaying = true;
+    let slideTimer;
 
-function showSlides() {
-    const slides = document.getElementsByClassName("mySlides");
-    for (let i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
+    /**
+     * Initialize the slideshow
+     */
+    function initSlideshow() {
+        showSlides(slideIndex);
+        startAutoSlide();
     }
-    slideIndex++;
-    if (slideIndex > slides.length) {slideIndex = 1}
-    slides[slideIndex-1].style.display = "block";
-    setTimeout(showSlides, 3000); // Change image every 3 seconds
-}
 
-function plusSlides(n) {
-    slideIndex += n;
-    showSlides();
-}
+    /**
+     * Display the current slide
+     * @param {number} n - The slide index
+     */
+    function showSlides(n) {
+        if (n >= slides.length) {
+            slideIndex = 0;
+        } else if (n < 0) {
+            slideIndex = slides.length - 1;
+        }
+
+        slides.forEach(slide => slide.classList.remove('active'));
+        dots.forEach(dot => {
+            dot.classList.remove('active');
+            dot.setAttribute('aria-selected', 'false');
+        });
+
+        slides[slideIndex].classList.add('active');
+        dots[slideIndex].classList.add('active');
+        dots[slideIndex].setAttribute('aria-selected', 'true');
+    }
+
+    /**
+     * Change slide by n positions
+     * @param {number} n - Number of slides to move
+     */
+    function changeSlide(n) {
+        slideIndex += n;
+        showSlides(slideIndex);
+        resetAutoSlide();
+    }
+
+    /**
+     * Go to a specific slide
+     * @param {number} n - The slide index
+     */
+    function currentSlide(n) {
+        slideIndex = n;
+        showSlides(slideIndex);
+        resetAutoSlide();
+    }
+
+    /**
+     * Toggle play/pause functionality
+     */
+    function togglePlayPause() {
+        isPlaying = !isPlaying;
+        playPauseBtn.textContent = isPlaying ? 'Pause' : 'Play';
+        playPauseBtn.setAttribute('aria-label', isPlaying ? 'Pause slideshow' : 'Play slideshow');
+        
+        if (isPlaying) {
+            startAutoSlide();
+        } else {
+            clearTimeout(slideTimer);
+        }
+    }
+
+    /**
+     * Start automatic slide progression
+     */
+    function startAutoSlide() {
+        if (isPlaying) {
+            slideTimer = setTimeout(() => {
+                slideIndex++;
+                showSlides(slideIndex);
+                startAutoSlide();
+            }, 3000); // Change image every 3 seconds
+        }
+    }
+
+    /**
+     * Reset the auto-slide timer
+     */
+    function resetAutoSlide() {
+        clearTimeout(slideTimer);
+        if (isPlaying) {
+            startAutoSlide();
+        }
+    }
+
+    // Initialize slideshow on page load
+    document.addEventListener('DOMContentLoaded', initSlideshow);
 </script>
 
 </body>
