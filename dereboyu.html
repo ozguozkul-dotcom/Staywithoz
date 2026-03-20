@@ -110,8 +110,13 @@
 }
     .slide{ position:absolute; inset:0; opacity:0; transition: opacity 650ms ease; }
     .slide.active{ opacity:1; }
-    .slide img{ width:100%; height:100%; object-fit: cover; display:block; }
-
+    .slide img{
+  width:100%;
+  height:100%;
+  object-fit: contain;   /* fit fully on screen */
+  background: rgba(0,0,0,0.25); /* so empty bars look nice */
+  display:block;
+}
     .dots{
       position:absolute;
       left: 14px; right: 14px; bottom: 12px;
@@ -129,6 +134,75 @@
       background: rgba(125,211,252,0.85);
       border-color: rgba(125,211,252,0.95);
     }
+    /* --- Lightbox (enlarge) --- */
+.lightbox{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 9999;
+}
+.lightbox.open{ display: flex; }
+
+.lightbox-inner{
+  position: relative;
+  width: min(1100px, 96vw);
+  height: min(80vh, 720px);
+}
+
+.lightbox-img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  border-radius: 14px;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.14);
+}
+
+.lb-btn{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.28);
+  background: rgba(0,0,0,0.35);
+  color: rgba(255,255,255,0.92);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  line-height: 1;
+  user-select: none;
+}
+.lb-btn:hover{ background: rgba(0,0,0,0.5); }
+.lb-prev{ left: -10px; }
+.lb-next{ right: -10px; }
+
+.lb-close{
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.28);
+  background: rgba(0,0,0,0.45);
+  color: rgba(255,255,255,0.92);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+}
+.lb-close:hover{ background: rgba(0,0,0,0.6); }
+
+/* make slides clickable (zoom cursor) */
+.slide img{ cursor: zoom-in; }
 
     /* --- Location section --- */
     .row{
@@ -392,11 +466,12 @@
       let index = 0;
       let timer = null;
 
-      function setActive(i){
-        index = (i + slides.length) % slides.length;
-        slides.forEach((s, si) => s.classList.toggle('active', si === index));
-        dots.forEach((d, di) => d.setAttribute('aria-current', di === index ? 'true' : 'false'));
-      }
+   function setActive(i){
+  index = (i + slides.length) % slides.length;
+  slides.forEach((s, si) => s.classList.toggle('active', si === index));
+  dots.forEach((d, di) => d.setAttribute('aria-current', di === index ? 'true' : 'false'));
+  syncLightboxImage();
+}
 
       function start(){
         stop();
@@ -413,11 +488,76 @@
           start();
         });
       });
+      // --- Lightbox logic ---
+const lightbox = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbPrev = document.getElementById('lbPrev');
+const lbNext = document.getElementById('lbNext');
+const lbClose = document.getElementById('lbClose');
+
+function openLightbox(){
+  if(!lightbox || !lbImg) return;
+  const activeImg = slides[index]?.querySelector('img');
+  if(activeImg) lbImg.src = activeImg.getAttribute('src');
+
+  lightbox.classList.add('open');
+  lightbox.setAttribute('aria-hidden', 'false');
+  stop();
+}
+
+function closeLightbox(){
+  if(!lightbox) return;
+  lightbox.classList.remove('open');
+  lightbox.setAttribute('aria-hidden', 'true');
+  start();
+}
+
+function syncLightboxImage(){
+  if(lightbox && lightbox.classList.contains('open') && lbImg){
+    const activeImg = slides[index]?.querySelector('img');
+    if(activeImg) lbImg.src = activeImg.getAttribute('src');
+  }
+}
+
+// make each slide image clickable
+slides.forEach((s) => {
+  const img = s.querySelector('img');
+  if(img) img.addEventListener('click', openLightbox);
+});
+
+// lightbox controls
+if(lbPrev) lbPrev.addEventListener('click', () => setActive(index - 1));
+if(lbNext) lbNext.addEventListener('click', () => setActive(index + 1));
+if(lbClose) lbClose.addEventListener('click', closeLightbox);
+
+// click outside image closes
+if(lightbox){
+  lightbox.addEventListener('click', (e) => {
+    if(e.target === lightbox) closeLightbox();
+  });
+}
+
+// keyboard controls
+document.addEventListener('keydown', (e) => {
+  if(!lightbox || !lightbox.classList.contains('open')) return;
+  if(e.key === 'Escape') closeLightbox();
+  if(e.key === 'ArrowLeft') setActive(index - 1);
+  if(e.key === 'ArrowRight') setActive(index + 1);
+});
 
       slider.addEventListener('mouseenter', stop);
       slider.addEventListener('mouseleave', start);
       start();
     })();
+      <!-- Lightbox overlay -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lightbox-inner" role="dialog" aria-modal="true" aria-label="Fotoğraf görüntüleyici">
+      <button class="lb-close" type="button" id="lbClose" aria-label="Kapat">✕</button>
+      <button class="lb-btn lb-prev" type="button" id="lbPrev" aria-label="Önceki">‹</button>
+      <img class="lightbox-img" id="lbImg" alt="Büyük fotoğraf">
+      <button class="lb-btn lb-next" type="button" id="lbNext" aria-label="Sonraki">›</button>
+    </div>
+  </div>
   </script>
 </body>
 </html>
