@@ -6,6 +6,26 @@
   <title>Heart of Nicosia - Dereboyu</title>
 
   <style>
+    .nav{
+  position:absolute;
+  top:50%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.35);
+  background: rgba(0,0,0,0.30);
+  color: rgba(255,255,255,0.92);
+  cursor: pointer;
+  display:grid;
+  place-items:center;
+  font-size: 22px;
+  line-height: 1;
+  z-index: 5;
+}
+.nav:hover{ background: rgba(0,0,0,0.45); }
+.nav.prev{ left: 12px; }
+.nav.next{ right: 12px; }
     :root{
       --card: rgba(255,255,255,0.08);
       --card2: rgba(255,255,255,0.06);
@@ -463,6 +483,15 @@
 
       const slides = Array.from(slider.querySelectorAll('.slide'));
       const dots = Array.from(slider.querySelectorAll('.dot'));
+      const prevBtn = slider.querySelector('.nav.prev');
+const nextBtn = slider.querySelector('.nav.next');
+
+if(prevBtn){
+  prevBtn.addEventListener('click', () => { setActive(index - 1); start(); });
+}
+if(nextBtn){
+  nextBtn.addEventListener('click', () => { setActive(index + 1); start(); });
+}
       let index = 0;
       let timer = null;
 
@@ -549,7 +578,9 @@ document.addEventListener('keydown', (e) => {
       slider.addEventListener('mouseleave', start);
       start();
     })();
-      <!-- Lightbox overlay -->
+     
+  </div>
+     <!-- Lightbox overlay -->
   <div class="lightbox" id="lightbox" aria-hidden="true">
     <div class="lightbox-inner" role="dialog" aria-modal="true" aria-label="Fotoğraf görüntüleyici">
       <button class="lb-close" type="button" id="lbClose" aria-label="Kapat">✕</button>
@@ -557,7 +588,6 @@ document.addEventListener('keydown', (e) => {
       <img class="lightbox-img" id="lbImg" alt="Büyük fotoğraf">
       <button class="lb-btn lb-next" type="button" id="lbNext" aria-label="Sonraki">›</button>
     </div>
-  </div>
   </script>
 </body>
 </html>
