@@ -476,6 +476,16 @@
     </section>
   </div>
 
+   <!-- Lightbox overlay -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lightbox-inner" role="dialog" aria-modal="true" aria-label="Fotoğraf görüntüleyici">
+      <button class="lb-close" type="button" id="lbClose" aria-label="Kapat">✕</button>
+      <button class="lb-btn lb-prev" type="button" id="lbPrev" aria-label="Önceki">‹</button>
+      <img class="lightbox-img" id="lbImg" alt="Büyük fotoğraf">
+      <button class="lb-btn lb-next" type="button" id="lbNext" aria-label="Sonraki">›</button>
+    </div>
+  </div>
+
   <script>
     (function(){
       const slider = document.getElementById('slider');
@@ -484,23 +494,26 @@
       const slides = Array.from(slider.querySelectorAll('.slide'));
       const dots = Array.from(slider.querySelectorAll('.dot'));
       const prevBtn = slider.querySelector('.nav.prev');
-const nextBtn = slider.querySelector('.nav.next');
+      const nextBtn = slider.querySelector('.nav.next');
 
-if(prevBtn){
-  prevBtn.addEventListener('click', () => { setActive(index - 1); start(); });
-}
-if(nextBtn){
-  nextBtn.addEventListener('click', () => { setActive(index + 1); start(); });
-}
       let index = 0;
       let timer = null;
 
-   function setActive(i){
-  index = (i + slides.length) % slides.length;
-  slides.forEach((s, si) => s.classList.toggle('active', si === index));
-  dots.forEach((d, di) => d.setAttribute('aria-current', di === index ? 'true' : 'false'));
-  syncLightboxImage();
-}
+      function syncLightboxImage(){
+        const lightbox = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lbImg');
+        if(lightbox && lightbox.classList.contains('open') && lbImg){
+          const activeImg = slides[index]?.querySelector('img');
+          if(activeImg) lbImg.src = activeImg.getAttribute('src');
+        }
+      }
+
+      function setActive(i){
+        index = (i + slides.length) % slides.length;
+        slides.forEach((s, si) => s.classList.toggle('active', si === index));
+        dots.forEach((d, di) => d.setAttribute('aria-current', di === index ? 'true' : 'false'));
+        syncLightboxImage();
+      }
 
       function start(){
         stop();
@@ -511,83 +524,66 @@ if(nextBtn){
         timer = null;
       }
 
+      // dots
       dots.forEach((dot, di) => {
         dot.addEventListener('click', () => {
           setActive(di);
           start();
         });
       });
-      // --- Lightbox logic ---
-const lightbox = document.getElementById('lightbox');
-const lbImg = document.getElementById('lbImg');
-const lbPrev = document.getElementById('lbPrev');
-const lbNext = document.getElementById('lbNext');
-const lbClose = document.getElementById('lbClose');
 
-function openLightbox(){
-  if(!lightbox || !lbImg) return;
-  const activeImg = slides[index]?.querySelector('img');
-  if(activeImg) lbImg.src = activeImg.getAttribute('src');
+      // slider arrows
+      if(prevBtn) prevBtn.addEventListener('click', () => { setActive(index - 1); start(); });
+      if(nextBtn) nextBtn.addEventListener('click', () => { setActive(index + 1); start(); });
 
-  lightbox.classList.add('open');
-  lightbox.setAttribute('aria-hidden', 'false');
-  stop();
-}
+      // lightbox
+      const lightbox = document.getElementById('lightbox');
+      const lbImg = document.getElementById('lbImg');
+      const lbPrev = document.getElementById('lbPrev');
+      const lbNext = document.getElementById('lbNext');
+      const lbClose = document.getElementById('lbClose');
 
-function closeLightbox(){
-  if(!lightbox) return;
-  lightbox.classList.remove('open');
-  lightbox.setAttribute('aria-hidden', 'true');
-  start();
-}
+      function openLightbox(){
+        if(!lightbox || !lbImg) return;
+        const activeImg = slides[index]?.querySelector('img');
+        if(activeImg) lbImg.src = activeImg.getAttribute('src');
+        lightbox.classList.add('open');
+        lightbox.setAttribute('aria-hidden', 'false');
+        stop();
+      }
+      function closeLightbox(){
+        if(!lightbox) return;
+        lightbox.classList.remove('open');
+        lightbox.setAttribute('aria-hidden', 'true');
+        start();
+      }
 
-function syncLightboxImage(){
-  if(lightbox && lightbox.classList.contains('open') && lbImg){
-    const activeImg = slides[index]?.querySelector('img');
-    if(activeImg) lbImg.src = activeImg.getAttribute('src');
-  }
-}
+      slides.forEach((s) => {
+        const img = s.querySelector('img');
+        if(img) img.addEventListener('click', openLightbox);
+      });
 
-// make each slide image clickable
-slides.forEach((s) => {
-  const img = s.querySelector('img');
-  if(img) img.addEventListener('click', openLightbox);
-});
+      if(lbPrev) lbPrev.addEventListener('click', () => setActive(index - 1));
+      if(lbNext) lbNext.addEventListener('click', () => setActive(index + 1));
+      if(lbClose) lbClose.addEventListener('click', closeLightbox);
 
-// lightbox controls
-if(lbPrev) lbPrev.addEventListener('click', () => setActive(index - 1));
-if(lbNext) lbNext.addEventListener('click', () => setActive(index + 1));
-if(lbClose) lbClose.addEventListener('click', closeLightbox);
+      if(lightbox){
+        lightbox.addEventListener('click', (e) => {
+          if(e.target === lightbox) closeLightbox();
+        });
+      }
 
-// click outside image closes
-if(lightbox){
-  lightbox.addEventListener('click', (e) => {
-    if(e.target === lightbox) closeLightbox();
-  });
-}
-
-// keyboard controls
-document.addEventListener('keydown', (e) => {
-  if(!lightbox || !lightbox.classList.contains('open')) return;
-  if(e.key === 'Escape') closeLightbox();
-  if(e.key === 'ArrowLeft') setActive(index - 1);
-  if(e.key === 'ArrowRight') setActive(index + 1);
-});
+      document.addEventListener('keydown', (e) => {
+        if(!lightbox || !lightbox.classList.contains('open')) return;
+        if(e.key === 'Escape') closeLightbox();
+        if(e.key === 'ArrowLeft') setActive(index - 1);
+        if(e.key === 'ArrowRight') setActive(index + 1);
+      });
 
       slider.addEventListener('mouseenter', stop);
       slider.addEventListener('mouseleave', start);
       start();
     })();
-     
-  </div>
-     <!-- Lightbox overlay -->
-  <div class="lightbox" id="lightbox" aria-hidden="true">
-    <div class="lightbox-inner" role="dialog" aria-modal="true" aria-label="Fotoğraf görüntüleyici">
-      <button class="lb-close" type="button" id="lbClose" aria-label="Kapat">✕</button>
-      <button class="lb-btn lb-prev" type="button" id="lbPrev" aria-label="Önceki">‹</button>
-      <img class="lightbox-img" id="lbImg" alt="Büyük fotoğraf">
-      <button class="lb-btn lb-next" type="button" id="lbNext" aria-label="Sonraki">›</button>
-    </div>
   </script>
 </body>
 </html>
