@@ -326,9 +326,10 @@
       display:block;
       width:100%;
       height:auto;
-      max-width: 120px;
+      max-width: 240px;
       border-radius: 14px;
       margin: 0 auto;
+      cursor: zoom-in;
     }
     .caption{
       color: var(--muted);
@@ -469,7 +470,7 @@ style="display:inline-block; padding:10px 20px; background:black; color:white; b
       </ul>
 
       <div class="inlineMedia">
-        <img src="cop.png" alt="Çöp konteynerlerinin yeri">
+        <img id="copImg" src="cop.png" alt="Çöp konteynerlerinin yeri">
         <p class="caption">çöp konteynerlerinin yeri</p>
       </div>
 
@@ -602,6 +603,20 @@ style="display:inline-block; padding:10px 20px; background:black; color:white; b
       slider.addEventListener('mouseleave', start);
       start();
     })();
+    
+    // Cop fotosu lightbox
+    const copImg = document.getElementById('copImg');
+    if(copImg){
+      copImg.addEventListener('click', () => {
+        const lbImg = document.getElementById('lbImg');
+        const lightbox = document.getElementById('lightbox');
+        if(lbImg && lightbox){
+          lbImg.src = copImg.src;
+          lightbox.classList.add('open');
+          lightbox.setAttribute('aria-hidden', 'false');
+        }
+      });
+    }
   </script>
 </body>
 </html>
