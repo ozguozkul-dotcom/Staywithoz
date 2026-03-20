@@ -118,15 +118,19 @@
       box-shadow: var(--shadow);
       overflow: hidden;
     }
-    .slider{
+.slider{
   position: relative;
-  aspect-ratio: 16 / 6;  /* biraz daha geniş hissi */
-  min-height: 300px;     /* yükseltildi */
-  max-height: 460px;     /* yükseltildi */
+  aspect-ratio: 16 / 9;     /* daha “kutumsu”, küçük ve stabil */
+  min-height: 200px;        /* küçüldü */
+  max-height: 320px;        /* küçüldü */
   background: rgba(0,0,0,0.12);
 }
 @media (max-width: 820px){
-  .slider{ aspect-ratio: 16 / 9; }
+  .slider{
+    aspect-ratio: 4 / 3;    /* telefonda daha küçük kutu */
+    min-height: 180px;
+    max-height: 260px;
+  }
 }
     .slide{ position:absolute; inset:0; opacity:0; transition: opacity 650ms ease; }
     .slide.active{ opacity:1; }
