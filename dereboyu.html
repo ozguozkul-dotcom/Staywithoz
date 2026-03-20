@@ -495,9 +495,16 @@ style="display:inline-block; padding:10px 20px; background:black; color:white; b
             <b>Asansör notu:</b> Maalesef asansörümüz şu an için çalışmamaktadır. Bunun için özür dileriz.
           </div>
         </div>
+ <div class="accordion-item">
+      <button class="accordion-title">🚪 Giriş Bilgisi</button>
+      <div class="accordion-content">
+        
+         </div>
+    </div>
 
-    <section class="card">
-      <h2>📋 Evin Kuralları</h2>
+    <div class="accordion-item">
+      <button class="accordion-title">📋 Evin Kuralları</button>
+      <div class="accordion-content">
       <ul class="rules">
         <li><b>Giriş / Çıkış Saati:</b> 15:00 - 11:00</li>
         <li><b>Wi‑Fi:</b> Ad: Oz — Şifre: Misafirlere verilecektir</li>
@@ -531,7 +538,8 @@ style="display:inline-block; padding:10px 20px; background:black; color:white; b
     <section class="card">
       <h2>📍 Bu Lokasyon Hakkında</h2>
       <p style="margin:0; color: var(--muted);">Yakında eklenecek.</p>
-    </section>
+        </div>
+    </div>
 
     <section class="card">
       <h2>✨ Yapılacaklar</h2>
@@ -661,6 +669,14 @@ style="display:inline-block; padding:10px 20px; background:black; color:white; b
         }
       });
     }
+    
+    // Accordion functionality
+    document.querySelectorAll('.accordion-title').forEach(btn => {
+      btn.addEventListener('click', function() {
+        this.classList.toggle('open');
+        this.nextElementSibling.classList.toggle('open');
+      });
+    });
   </script>
 </body>
 </html>
