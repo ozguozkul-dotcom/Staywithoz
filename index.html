@@ -6,6 +6,9 @@
 <style>
 body { font-family: Arial; margin:0; background:#f2f2f2; }
 .header { background:black; color:white; padding:15px; text-align:center; }
+.language-selector { margin-top:10px; }
+.lang-btn { padding:8px 12px; margin:0 5px; background:#666; color:white; border:none; border-radius:5px; cursor:pointer; font-weight:bold; }
+.lang-btn.active { background:#25D366; }
 .menu { display:flex; flex-wrap:wrap; justify-content:center; background:#333; padding:10px; }
 .menu a { color:white; margin:10px; text-decoration:none; font-weight:bold; }
 .card { background:white; margin:15px; padding:20px; border-radius:15px; }
@@ -17,6 +20,10 @@ body { font-family: Arial; margin:0; background:#f2f2f2; }
 
 <div class="header">
 <h1>🏡 StaywithOZ</h1>
+<div class="language-selector">
+  <button onclick="changeLanguage('en')" class="lang-btn">English</button>
+  <button onclick="changeLanguage('tr')" class="lang-btn">Türkçe</button>
+</div>
 </div>
 
 <div class="menu">
@@ -27,8 +34,8 @@ body { font-family: Arial; margin:0; background:#f2f2f2; }
 
 <!-- WELCOME -->
 <div class="card">
-<h2>👋 Welcome</h2>
-<p>
+<h2 data-i18n="welcome_h">👋 Welcome</h2>
+<p data-i18n="welcome_p">
 Welcome to your stay! We are happy to host you 😊<br><br>
 On this page, you can find all the information you may need during your stay.<br><br>
 👉 Please select your apartment from the menu above to access detailed information about your place, including location, amenities, and house rules.
@@ -37,8 +44,8 @@ On this page, you can find all the information you may need during your stay.<br
 
 <!-- CONTACT -->
 <div class="card">
-<h2>📞 Contact</h2>
-<p>
+<h2 data-i18n="contact_h">📞 Contact</h2>
+<p data-i18n="contact_p">
 If you need anything during your stay, feel free to contact me anytime.<br><br>
 I am always available to help you.
 </p>
@@ -50,7 +57,7 @@ I am always available to help you.
 
 <!-- EMERGENCY -->
 <div class="card">
-<h2>🚨 Emergency Numbers</h2>
+<h2 data-i18n="emergency_h">🚨 Emergency Numbers</h2>
 <p><strong>Police:</strong> 155</p>
 <p><strong>Ambulance:</strong> 112</p>
 <p><strong>Fire Department:</strong> 199</p>
@@ -98,6 +105,44 @@ I am always available to help you.
 </div>
 
 <script>
+const translations = {
+  en: {
+    welcome_h: "👋 Welcome",
+    welcome_p: "Welcome to your stay! We are happy to host you 😊<br><br>On this page, you can find all the information you may need during your stay.<br><br>👉 Please select your apartment from the menu above to access detailed information about your place, including location, amenities, and house rules.",
+    contact_h: "📞 Contact",
+    contact_p: "If you need anything during your stay, feel free to contact me anytime.<br><br>I am always available to help you.",
+    emergency_h: "🚨 Emergency Numbers"
+  },
+  tr: {
+    welcome_h: "👋 Hoş Geldiniz",
+    welcome_p: "Konaklamanıza hoş geldiniz! Sizi ağırlamaktan mutluyuz 😊<br><br>Bu sayfada kalışınız boyunca ihtiyaç duyabileceğiniz tüm bilgileri bulabilirsiniz.<br><br>👉 Lütfen bulunduğunuz yer hakkında ayrıntılı bilgilere, tesisler ve ev kurallarına erişmek için yukarıdaki menüden dairenizi seçin.",
+    contact_h: "📞 İletişim",
+    contact_p: "Kalışınız boyunca herhangi bir şeye ihtiyaç duyarsanız, istediğiniz zaman bana ulaşmaktan çekinmeyin.<br><br>Size yardımcı olmak için her zaman uygunum.",
+    emergency_h: "🚨 Acil Durum Numaraları"
+  }
+};
+
+function changeLanguage(lang) {
+  localStorage.setItem('language', lang);
+  document.documentElement.lang = lang;
+  
+  // Sayfayı güncelle
+  document.querySelectorAll('[data-i18n]').forEach(element => {
+    const key = element.getAttribute('data-i18n');
+    element.innerHTML = translations[lang][key];
+  });
+  
+  // Buton aktifliğini göster
+  document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+// Sayfa yükleme sırasında önceki dil seçimini hatırla
+window.onload = function() {
+  const savedLang = localStorage.getItem('language') || 'en';
+  changeLanguage(savedLang);
+};
+
 function toggleMenu() {
   var x = document.getElementById("nicosiaMenu");
   if (x.style.display === "none") {
