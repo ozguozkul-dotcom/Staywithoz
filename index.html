@@ -13,6 +13,8 @@ body { font-family: Arial; margin:0; background:#f2f2f2; }
 .menu a { color:white; margin:10px; text-decoration:none; font-weight:bold; }
 .card { background:white; margin:15px; padding:20px; border-radius:15px; }
 .whatsapp { display:inline-block; margin-top:10px; padding:10px 15px; background:#25D366; color:white; border-radius:10px; text-decoration:none; font-weight:bold; }
+.accordion-btn { margin-top:10px; padding:10px; width:100%; border:none; border-radius:10px; background:#333; color:white; font-weight:bold; cursor:pointer; }
+.accordion-content { display:none; margin-top:10px; }
 </style>
 </head>
 
@@ -21,8 +23,8 @@ body { font-family: Arial; margin:0; background:#f2f2f2; }
 <div class="header">
 <h1>🏡 StaywithOZ</h1>
 <div class="language-selector">
-  <button onclick="changeLanguage('en')" class="lang-btn">English</button>
-  <button onclick="changeLanguage('tr')" class="lang-btn">Türkçe</button>
+  <button onclick="changeLanguage('en')" class="lang-btn">🇬🇧 English</button>
+  <button onclick="changeLanguage('tr')" class="lang-btn">🇹🇷 Türkçe</button>
 </div>
 </div>
 
@@ -67,26 +69,51 @@ I am always available to help you.
 <h2>📍 Things to Do in Cyprus</h2>
 
 <!-- St Hilarion -->
-<p><a href="https://en.wikipedia.org/wiki/Saint_Hilarion_Castle" target="_blank">• St. Hilarion Castle</a></p>
+<button onclick="toggleAccordion('hilarionMenu')" class="accordion-btn">
+📍 St. Hilarion Castle ▼
+</button>
+<div id="hilarionMenu" class="accordion-content">
+<p><a href="https://en.wikipedia.org/wiki/Saint_Hilarion_Castle" target="_blank">• St. Hilarion Castle – Wikipedia</a></p>
+</div>
 
 <!-- Buffavento -->
-<p><a href="https://en.wikipedia.org/wiki/Buffavento_Castle" target="_blank">• Buffavento Castle</a></p>
+<button onclick="toggleAccordion('buffaventoMenu')" class="accordion-btn">
+📍 Buffavento Castle ▼
+</button>
+<div id="buffaventoMenu" class="accordion-content">
+<p><a href="https://en.wikipedia.org/wiki/Buffavento_Castle" target="_blank">• Buffavento Castle – Wikipedia</a></p>
+</div>
 
 <!-- Girne Old Harbour -->
-<p><a href="https://en.wikipedia.org/wiki/Kyrenia" target="_blank">• Kyrenia Old Harbour</a></p>
+<button onclick="toggleAccordion('kyreniaMenu')" class="accordion-btn">
+📍 Kyrenia Old Harbour ▼
+</button>
+<div id="kyreniaMenu" class="accordion-content">
+<p><a href="https://en.wikipedia.org/wiki/Kyrenia" target="_blank">• Kyrenia Old Harbour – Wikipedia</a></p>
+</div>
 
 <!-- Karaman (Karami / Karmi Village) -->
-<p><a href="https://en.wikipedia.org/wiki/Karmi" target="_blank">• Karmi Village</a></p>
+<button onclick="toggleAccordion('karmiMenu')" class="accordion-btn">
+📍 Karmi Village ▼
+</button>
+<div id="karmiMenu" class="accordion-content">
+<p><a href="https://en.wikipedia.org/wiki/Karmi" target="_blank">• Karmi Village – Wikipedia</a></p>
+</div>
 
 <!-- Bellapais -->
-<p><a href="https://en.wikipedia.org/wiki/Bellapais_Abbey" target="_blank">• Bellapais Abbey</a></p>
+<button onclick="toggleAccordion('bellapaisMenu')" class="accordion-btn">
+📍 Bellapais Abbey ▼
+</button>
+<div id="bellapaisMenu" class="accordion-content">
+<p><a href="https://en.wikipedia.org/wiki/Bellapais_Abbey" target="_blank">• Bellapais Abbey – Wikipedia</a></p>
+</div>
 
 <!-- ACCORDION -->
-<button onclick="toggleMenu()" style="margin-top:10px; padding:10px; width:100%; border:none; border-radius:10px; background:#333; color:white; font-weight:bold;">
+<button onclick="toggleAccordion('nicosiaMenu')" class="accordion-btn">
 📍 Nicosia Old Town ▼
 </button>
 
-<div id="nicosiaMenu" style="display:none; margin-top:10px;">
+<div id="nicosiaMenu" class="accordion-content">
 
 <p><a href="https://en.wikipedia.org/wiki/Kyrenia_Gate" target="_blank">• Kyrenia Gate</a></p>
 
@@ -143,9 +170,9 @@ window.onload = function() {
   changeLanguage(savedLang);
 };
 
-function toggleMenu() {
-  var x = document.getElementById("nicosiaMenu");
-  if (x.style.display === "none") {
+function toggleAccordion(id) {
+  var x = document.getElementById(id);
+  if (x.style.display === "none" || x.style.display === "") {
     x.style.display = "block";
   } else {
     x.style.display = "none";
