@@ -37,6 +37,18 @@ body {
   background:white;
 }
 .whatsapp { display:inline-block; margin-top:10px; padding:10px 15px; background:#25D366; color:white; border-radius:10px; text-decoration:none; font-weight:bold; }
+.lang-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.flag {
+  width: 18px;
+  height: 12px;
+  display: inline-block;
+  border-radius: 2px;
+}
 </style>
 </head>
 
@@ -45,8 +57,15 @@ body {
 <div class="header">
 <h1>🏡 StaywithOZ</h1>
 <div class="language-selector">
-<button onclick="changeLanguage('en')" class="lang-btn">🇬🇧 ENG</button>
-<button onclick="changeLanguage('tr')" class="lang-btn">🇹🇷 TUR</button>
+<button onclick="changeLanguage('en')" class="lang-btn">
+  <img class="flag" src="assets/flags/gb.svg" alt="English">
+  ENG
+</button>
+
+<button onclick="changeLanguage('tr')" class="lang-btn">
+  <img class="flag" src="assets/flags/tr.svg" alt="Türkçe">
+  TUR
+</button>
 </div>
 </div>
 
