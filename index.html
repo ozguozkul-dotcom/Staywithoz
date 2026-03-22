@@ -12,6 +12,24 @@ body { font-family: Arial; margin:0; background:#f2f2f2; }
 .menu { display:flex; flex-wrap:wrap; justify-content:center; background:#333; padding:10px; }
 .menu a { color:white; margin:10px; text-decoration:none; font-weight:bold; }
 .card { background:white; margin:15px; padding:20px; border-radius:15px; }
+  .accordion {
+  width:100%;
+  padding:12px;
+  margin-top:8px;
+  border:none;
+  border-radius:10px;
+  background:#333;
+  color:white;
+  text-align:left;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.panel {
+  display:none;
+  padding:10px;
+  background:white;
+}
 .whatsapp { display:inline-block; margin-top:10px; padding:10px 15px; background:#25D366; color:white; border-radius:10px; text-decoration:none; font-weight:bold; }
 </style>
 </head>
@@ -21,8 +39,8 @@ body { font-family: Arial; margin:0; background:#f2f2f2; }
 <div class="header">
 <h1>🏡 StaywithOZ</h1>
 <div class="language-selector">
-  <button onclick="changeLanguage('en')" class="lang-btn">English</button>
-  <button onclick="changeLanguage('tr')" class="lang-btn">Türkçe</button>
+ <button onclick="changeLanguage('en')" class="lang-btn">🇬🇧 EN</button>
+<button onclick="changeLanguage('tr')" class="lang-btn">🇹🇷 TR</button>
 </div>
 </div>
 
@@ -66,39 +84,67 @@ I am always available to help you.
 <div class="card" id="kibris">
 <h2>📍 Things to Do in Cyprus</h2>
 
-<!-- St Hilarion -->
-<p><a href="https://en.wikipedia.org/wiki/Saint_Hilarion_Castle" target="_blank">• St. Hilarion Castle</a></p>
+<!-- ITEM -->
+<button class="accordion">🏰 St. Hilarion Castle</button>
+<div class="panel">
+<p>
+<a href="https://en.wikipedia.org/wiki/Saint_Hilarion_Castle" target="_blank">Wikipedia</a><br>
+<a href="https://maps.google.com/?q=St+Hilarion+Castle" target="_blank">Google Maps</a>
+</p>
+</div>
 
-<!-- Buffavento -->
-<p><a href="https://en.wikipedia.org/wiki/Buffavento_Castle" target="_blank">• Buffavento Castle</a></p>
+<button class="accordion">🏰 Buffavento Castle</button>
+<div class="panel">
+<p>
+<a href="https://en.wikipedia.org/wiki/Buffavento_Castle" target="_blank">Wikipedia</a><br>
+<a href="https://maps.google.com/?q=Buffavento+Castle" target="_blank">Google Maps</a>
+</p>
+</div>
 
-<!-- Girne Old Harbour -->
-<p><a href="https://en.wikipedia.org/wiki/Kyrenia" target="_blank">• Kyrenia Old Harbour</a></p>
+<button class="accordion">⚓ Kyrenia Old Harbour</button>
+<div class="panel">
+<p>
+<a href="https://en.wikipedia.org/wiki/Kyrenia" target="_blank">Wikipedia</a><br>
+<a href="https://maps.google.com/?q=Kyrenia+Harbour" target="_blank">Google Maps</a>
+</p>
+</div>
 
-<!-- Karaman (Karami / Karmi Village) -->
-<p><a href="https://en.wikipedia.org/wiki/Karmi" target="_blank">• Karmi Village</a></p>
+<button class="accordion">🏡 Karmi Village</button>
+<div class="panel">
+<p>
+<a href="https://en.wikipedia.org/wiki/Karmi" target="_blank">Wikipedia</a><br>
+<a href="https://maps.google.com/?q=Karmi+Village" target="_blank">Google Maps</a>
+</p>
+</div>
 
-<!-- Bellapais -->
-<p><a href="https://en.wikipedia.org/wiki/Bellapais_Abbey" target="_blank">• Bellapais Abbey</a></p>
+<button class="accordion">⛪ Bellapais Abbey</button>
+<div class="panel">
+<p>
+<a href="https://en.wikipedia.org/wiki/Bellapais_Abbey" target="_blank">Wikipedia</a><br>
+<a href="https://maps.google.com/?q=Bellapais+Abbey" target="_blank">Google Maps</a>
+</p>
+</div>
 
-<!-- ACCORDION -->
-<button onclick="toggleMenu()" style="margin-top:10px; padding:10px; width:100%; border:none; border-radius:10px; background:#333; color:white; font-weight:bold;">
-📍 Nicosia Old Town ▼
-</button>
+<button class="accordion">🏙 Nicosia Old Town</button>
+<div class="panel">
 
-<div id="nicosiaMenu" style="display:none; margin-top:10px;">
+<p><a href="https://en.wikipedia.org/wiki/Kyrenia_Gate" target="_blank">Kyrenia Gate</a><br>
+<a href="https://maps.google.com/?q=Kyrenia+Gate+Nicosia" target="_blank">Google Maps</a></p>
 
-<p><a href="https://en.wikipedia.org/wiki/Kyrenia_Gate" target="_blank">• Kyrenia Gate</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Venetian_Column" target="_blank">Venetian Column</a><br>
+<a href="https://maps.google.com/?q=Venetian+Column+Nicosia" target="_blank">Google Maps</a></p>
 
-<p><a href="https://en.wikipedia.org/wiki/Venetian_Column" target="_blank">• Venetian Column</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Kumarc%C4%B1lar_Han%C4%B1" target="_blank">Kumarcılar Han</a><br>
+<a href="https://maps.google.com/?q=Kumarcilar+Han" target="_blank">Google Maps</a></p>
 
-<p><a href="https://en.wikipedia.org/wiki/Kumarc%C4%B1lar_Han%C4%B1" target="_blank">• Kumarcılar Han</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Buyuk_Han" target="_blank">Büyük Han</a><br>
+<a href="https://maps.google.com/?q=Buyuk+Han+Nicosia" target="_blank">Google Maps</a></p>
 
-<p><a href="https://en.wikipedia.org/wiki/Buyuk_Han" target="_blank">• Büyük Han</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Selimiye_Mosque,_Nicosia" target="_blank">Selimiye Mosque</a><br>
+<a href="https://maps.google.com/?q=Selimiye+Mosque+Nicosia" target="_blank">Google Maps</a></p>
 
-<p><a href="https://en.wikipedia.org/wiki/Selimiye_Mosque,_Nicosia" target="_blank">• Selimiye Mosque</a></p>
-
-<p><a href="https://en.wikipedia.org/wiki/Bandabulya" target="_blank">• Bandabulya</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Bandabulya" target="_blank">Bandabulya</a><br>
+<a href="https://maps.google.com/?q=Bandabulya+Nicosia" target="_blank">Google Maps</a></p>
 
 </div>
 
@@ -113,13 +159,13 @@ const translations = {
     contact_p: "If you need anything during your stay, feel free to contact me anytime.<br><br>I am always available to help you.",
     emergency_h: "🚨 Emergency Numbers"
   },
-  tr: {
-    welcome_h: "👋 Hoş Geldiniz",
-    welcome_p: "Konaklamanıza hoş geldiniz! Sizi ağırlamaktan mutluyuz 😊<br><br>Bu sayfada kalışınız boyunca ihtiyaç duyabileceğiniz tüm bilgileri bulabilirsiniz.<br><br>👉 Lütfen bulunduğunuz yer hakkında ayrıntılı bilgilere, tesisler ve ev kurallarına erişmek için yukarıdaki menüden dairenizi seçin.",
-    contact_h: "📞 İletişim",
-    contact_p: "Kalışınız boyunca herhangi bir şeye ihtiyaç duyarsanız, istediğiniz zaman bana ulaşmaktan çekinmeyin.<br><br>Size yardımcı olmak için her zaman uygunum.",
-    emergency_h: "🚨 Acil Durum Numaraları"
-  }
+tr: {
+  welcome_h: "👋 Hoş Geldiniz",
+  welcome_p: "Konaklamanıza hoş geldiniz, sizi ağırlamaktan mutluluk duyuyoruz 😊<br><br>Bu sayfada kalışınız boyunca ihtiyaç duyabileceğiniz tüm bilgileri bulabilirsiniz.<br><br>👉 Lütfen yukarıdaki menüden dairenizi seçerek konum, özellikler ve ev kuralları gibi detaylara ulaşın.",
+  contact_h: "📞 İletişim",
+  contact_p: "Kalışınız boyunca herhangi bir şeye ihtiyaç duyarsanız, dilediğiniz zaman bana yazabilirsiniz.<br><br>Size yardımcı olmaktan memnuniyet duyarım.",
+  emergency_h: "🚨 Acil Durum Numaraları"
+}
 };
 
 function changeLanguage(lang) {
@@ -149,6 +195,20 @@ function toggleMenu() {
     x.style.display = "block";
   } else {
     x.style.display = "none";
+  }
+}
+</script>
+  <script>
+var acc = document.getElementsByClassName("accordion");
+for (var i = 0; i < acc.length; i++) {
+  acc[i].onclick = function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.display === "block") {
+      panel.style.display = "none";
+    } else {
+      panel.style.display = "block";
+    }
   }
 }
 </script>
