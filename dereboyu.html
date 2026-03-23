@@ -434,8 +434,8 @@
          <span data-text="back-menu">Ana menüye dön</span>
         </a>
              <div style="display: flex; gap: 8px;">
-  <button id="langTr" class="lang-btn active" title="Türkçe">🇹🇷 TR</button>
-  <button id="langEn" class="lang-btn" title="English">🇬🇧 EN</button>
+<button id="langTr" class="lang-btn active" title="Türkçe"><span style="margin-right:4px;">🇹🇷</span>TR</button>
+<button id="langEn" class="lang-btn" title="English"><span style="margin-right:4px;">🇬🇧</span>EN</button>
 </div>
       </div>
 
@@ -914,29 +914,43 @@
     const langBtns = document.querySelectorAll('.lang-btn');
     let currentLang = localStorage.getItem('lang') || 'tr';
 
-    function switchLanguage(lang) {
-      currentLang = lang;
-      localStorage.setItem('lang', lang);
-      langBtns.forEach(btn => btn.classList.remove('active'));
-      document.getElementById('lang' + lang.toUpperCase()).classList.add('active');
-      updatePageText(lang);
-    }
+  function switchLanguage(lang) {
+  currentLang = lang;
+  localStorage.setItem('lang', lang);
+  
+  // Butonları güncelle
+  langBtns.forEach(btn => btn.classList.remove('active'));
+  document.getElementById('lang' + lang.toUpperCase()).classList.add('active');
+  
+  // Sayfa metnini güncelle
+  updatePageText(lang);
+}
 
-    function updatePageText(lang) {
-      document.querySelectorAll('[data-text]').forEach(el => {
-        const key = el.getAttribute('data-text');
-        if(langData[lang][key]) {
-          el.textContent = langData[lang][key];
-        }
-      });
+function updatePageText(lang) {
+  document.querySelectorAll('[data-text]').forEach(el => {
+    const key = el.getAttribute('data-text');
+    if(langData[lang] && langData[lang][key]) {
+      el.textContent = langData[lang][key];
     }
+  });
+}
 
-    langBtns.forEach(btn => {
-      btn.addEventListener('click', function() {
-        const lang = this.id.replace('lang', '').toLowerCase();
-        switchLanguage(lang);
-      });
-    });
+  langBtns.forEach(btn => {
+  btn.addEventListener('click', function() {
+    const lang = this.id.replace('lang', '').toLowerCase();
+    switchLanguage(lang);
+  });
+});
+
+// Başlangıçta dili ayarla
+switchLanguage(currentLang);
+    // Button görünüşlerini güncelle
+function updateButtonStates() {
+  langBtns.forEach(btn => {
+    btn.classList.remove('active');
+  });
+  document.getElementById('lang' + currentLang.toUpperCase()).classList.add('active');
+}
 
     switchLanguage(currentLang);
   </script>
