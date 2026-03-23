@@ -400,6 +400,26 @@
     .accordion-content.open{
       display: block;
     }
+        
+    /* --- Language Switch Buttons --- */
+    .lang-btn{
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+    .lang-btn:hover{
+      background: rgba(255,255,255,0.08);
+    }
+    .lang-btn.active{
+      background: rgba(125,211,252,0.20);
+      border-color: rgba(125,211,252,0.5);
+    }
   </style>
 
 </head>
@@ -410,12 +430,16 @@
       <div class="topline">
         <a class="back" href="index.html">
           <span aria-hidden="true">←</span>
-          <span>Ana menüye dön</span>
+         <span data-text="back-menu">Ana menüye dön</span>
         </a>
+                <div style="display: flex; gap: 8px;">
+          <button id="langTr" class="lang-btn active" title="Türkçe">TR</button>
+          <button id="langEn" class="lang-btn" title="English">EN</button>
+        </div>
       </div>
 
-      <h1 class="title">Heart of Nicosia - Dereboyu</h1>
-      <p class="subtitle">Evin lokasyonu, giriş bilgileri ve temel kurallar</p>
+      <h1 class="title" data-text="location-title">Heart of Nicosia - Dereboyu</h1>
+     <p class="subtitle">Evin lokasyonu, giriş bilgileri ve temel kurallar</p>
 
       <div class="hero">
         <div class="slider" id="slider" aria-label="Dereboyu fotoğraf slaytı">
@@ -441,7 +465,7 @@
 
     <!-- Location Section -->
     <div class="accordion-item">
-      <button class="accordion-title">🏠 Evin Lokasyonu</button>
+      <button class="accordion-title" data-text="location-title">🏠 Evin Lokasyonu</button>
       <div class="accordion-content">
         <div class="row">
           <div>
@@ -483,7 +507,7 @@
 
     <!-- Entry Information Section -->
     <div class="accordion-item">
-      <button class="accordion-title">🚪 Giriş Bilgisi</button>
+      <button class="accordion-title" data-text="entry-title">🚪 Giriş Bilgisi</button>
       <div class="accordion-content">
         <ul class="kv">
            <div class="note">
@@ -535,7 +559,7 @@
     </div>
         <!-- Useful Information Section -->
     <div class="accordion-item">
-      <button class="accordion-title">💡 Faydalı Bilgiler</button>
+     <button class="accordion-title" data-text="useful-title">💡 Faydalı Bilgiler</button>
       <div class="accordion-content">
                 <h2 style="margin-top: 0;">📺 TV</h2>
         <p>TV'de Netflix üyeliği vardır. Lütfen <b>"Guest"</b> kişisini seçerek oturum açınız. Herhangi bir problem yaşarsanız lütfen bize ulaşın.</p>
@@ -572,7 +596,7 @@
 
     <!-- House Rules Section -->
     <div class="accordion-item">
-      <button class="accordion-title">📋 Evin Kuralları</button>
+      <button class="accordion-title" data-text="rules-title">📋 Evin Kuralları</button>
       <div class="accordion-content">
         <ul class="rules">
           <li><b>Giriş / Çıkış Saati:</b> 15:00 - 11:00</li>
@@ -600,7 +624,7 @@
 
        <!-- About Location Section -->
     <div class="accordion-item">
-      <button class="accordion-title">📍 Bu Lokasyon Hakkında</button>
+      <button class="accordion-title" data-text="about-title">📍 Bu Lokasyon Hakkında</button>
       <div class="accordion-content" style="margin-top:40px; line-height:1.6;">
 
         <p>
@@ -781,6 +805,139 @@
         this.nextElementSibling.classList.toggle('open');
       });
     });
+        
+    // Language functionality
+    const langData = {
+      tr: {
+        'back-menu': 'Ana menüye dön',
+        'location-title': '🏠 Evin Lokasyonu',
+        'entry-title': '🚪 Giriş Bilgisi',
+        'useful-title': '💡 Faydalı Bilgiler',
+        'rules-title': '📋 Evin Kuralları',
+        'about-title': '📍 Bu Lokasyon Hakkında',
+        'location-key': 'Lokasyon',
+        'location-value': 'Dairenin lokasyonu Califorian Restaurant\'ın dibidir',
+        'address-key': 'Adres',
+        'address-value': 'Hacı Ali Apartmanı, A Blok, Kat 3, Daire: 6',
+        'map-location': '📍 Konum',
+        'get-directions': '📍 Yol Tarifi Al',
+        'elevator-note': 'Asansör notu: Maalesef asansörümüz şu an için çalışmamaktadır. Bunun için özür dileriz.',
+        'keys-from': 'Anahtarları Nereden Alırım',
+        'keys-desc': 'Daireye geldiğinizde anahtarlar kapının yanındaki anahtar kutusunda olacaktır. Anahtar kutusu şifresi misafirlere ayrıca bildirilecektir. Aşağıdaki videodan nasıl açacağınızı izleyebilirsiniz.',
+        'door-title': '🚪 Daire Kapısı',
+        'keybox-title': '🔑 Anahtar Kutusu',
+        'keybox-label': 'Anahtar Kutusu',
+        'key-handover': '🔑 Anahtar Teslimi',
+        'key-desc': 'Aşağıdaki videodan anahtar kutusunun kolayca nasıl açılacağını izleyebilirsiniz.',
+        'tv-title': '📺 TV',
+        'tv-desc': 'TV\'de Netflix üyeliği vardır. Lütfen "Guest" kişisini seçerek oturum açınız. Herhangi bir problem yaşarsanız lütfen bize ulaşın.',
+        'shower-title': '🚿 Duşta Nasıl Sıcak Su Alırım?',
+        'shower-desc': 'Sıcak su / duş: Duşta sıcak su için sağ odada olan fişi açarak şofbeni kullanabilirsiniz.',
+        'shower-label': 'Sıcak su için şofben fişi',
+        'wifi-title': '📶 WiFi Bilgileri',
+        'wifi-name': 'WIFI: OZ',
+        'wifi-pass': 'Şifre: Misafirlere WhatsApp aracılığı ile bildirilecektir',
+        'plugs-title': 'Asla Kapanmaması Gereken Fişler',
+        'plug-center': 'Ortadaki priz hiç kapanmayacak',
+        'plug-left': 'En soldaki çamaşır makinesi içindir',
+        'checkin': 'Giriş / Çıkış Saati: 15:00 - 11:00',
+        'rule-smoking': 'Dairede sigara içilmesi kesinlikle yasaktır.',
+        'rule-food': 'Mutfakta yer alan tüm yiyecek ve içecek ücretsizdir.',
+        'rule-dishes': 'Lütfen kullandığınız bulaşıkları yıkayınız.',
+        'rule-towels': 'Kullan��lan havluları ana kapının yanına yere bırakmanız rica olunur.',
+        'rule-sheets': 'Çarşaf ve battaniyeleri de kapının yanına bırakmanız rica olunur.',
+        'rule-no-food-rooms': 'Lütfen odalarda yemek yemeyiniz.',
+        'rule-toilet': 'WC\'de klozetin içine herhangi bir kağıt vs. atmayalım, bunun için çöp kovasını kullanalım.',
+        'rule-noise': '22:00\'den sonra gürültü yapmayınız.',
+        'rule-lock': 'Kapıyı giriş ve çıkışta kilitleyiniz.',
+        'rule-checkout': 'Check‑out yaptıktan sonra anahtarları anahtar kutusuna bırakıp sayıları karıştırınız.',
+        'rule-trash': 'Çöp: Çöpleri aşağıda bulunan çöp konteynerine atmanız rica olunur.',
+        'trash-label': 'Çöp konteynerlerinin yeri',
+        'location-intro': 'Dairemiz, Lefkoşa\'nın en canlı ve merkezi noktalarından biri olan Dereboyu bölgesinde yer almaktadır. Restoranlar, kafeler, alışveriş noktaları ve sosyal yaşam sadece birkaç adım uzaklıktadır. Hem kısa hem uzun süreli konaklamalar için ideal bir lokasyondur.',
+        'walking-distance': '🚶‍♂️ Yürüme Mesafesinde',
+        'nearby-places': '📍 Yakın Önemli Noktalar',
+        'location-conclusion': 'Merkezi konumu sayesinde birçok ihtiyacınızı yürüyerek karşılayabilir, aynı zamanda kısa bir sürüş ile adanın en popüler noktalarına kolayca ulaşabilirsiniz.'
+      },
+      en: {
+        'back-menu': 'Back to Main Menu',
+        'location-title': '🏠 House Location',
+        'entry-title': '🚪 Entry Information',
+        'useful-title': '💡 Useful Information',
+        'rules-title': '📋 House Rules',
+        'about-title': '📍 About This Location',
+        'location-key': 'Location',
+        'location-value': 'The apartment is located right below Califorian Restaurant',
+        'address-key': 'Address',
+        'address-value': 'Hacı Ali Apartment, Block A, Floor 3, Apartment: 6',
+        'map-location': '📍 Location',
+        'get-directions': '📍 Get Directions',
+        'elevator-note': 'Elevator note: Unfortunately, our elevator is currently not working. We apologize for this inconvenience.',
+        'keys-from': 'Where to Get Keys',
+        'keys-desc': 'When you arrive at the apartment, the keys will be in the key box next to the door. The key box password will be provided separately to guests. You can watch the video below to see how to open it.',
+        'door-title': '🚪 Apartment Door',
+        'keybox-title': '🔑 Key Box',
+        'keybox-label': 'Key Box',
+        'key-handover': '🔑 Key Handover',
+        'key-desc': 'You can watch the video below to learn how to easily open the key box.',
+        'tv-title': '📺 TV',
+        'tv-desc': 'The TV has Netflix membership. Please log in by selecting the "Guest" profile. If you have any problems, please contact us.',
+        'shower-title': '🚿 How to Get Hot Water in the Shower?',
+        'shower-desc': 'Hot water / shower: To get hot water in the shower, open the plug in the right room and use the shower.',
+        'shower-label': 'Hot water shower plug',
+        'wifi-title': '📶 WiFi Information',
+        'wifi-name': 'WIFI: OZ',
+        'wifi-pass': 'Password: Will be provided to guests via WhatsApp',
+        'plugs-title': 'Plugs That Should Never Be Turned Off',
+        'plug-center': 'Never turn off the middle plug',
+        'plug-left': 'The leftmost one is for the washing machine',
+        'checkin': 'Check-in / Check-out Time: 15:00 - 11:00',
+        'rule-smoking': 'Smoking in the apartment is strictly prohibited.',
+        'rule-food': 'All food and beverages in the kitchen are free.',
+        'rule-dishes': 'Please wash the dishes you use.',
+        'rule-towels': 'Please leave used towels on the floor next to the main door.',
+        'rule-sheets': 'Please also leave sheets and blankets next to the door.',
+        'rule-no-food-rooms': 'Please do not eat in the bedrooms.',
+        'rule-toilet': 'Do not throw any paper in the toilet; use the trash bin instead.',
+        'rule-noise': 'Do not make noise after 22:00.',
+        'rule-lock': 'Lock the door when entering and leaving.',
+        'rule-checkout': 'After checking out, leave the keys in the key box and mix up their numbers.',
+        'rule-trash': 'Trash: Please dispose of trash in the trash containers below.',
+        'trash-label': 'Location of trash containers',
+        'location-intro': 'Our apartment is located in the Dereboyu area, one of the most vibrant and central points of Nicosia. Restaurants, cafes, shopping points and social life are just a few steps away. It is an ideal location for both short and long-term stays.',
+        'walking-distance': '🚶‍♂️ Walking Distance',
+        'nearby-places': '📍 Nearby Important Places',
+        'location-conclusion': 'Thanks to its central location, you can meet many of your needs on foot, and at the same time easily reach the most popular points of the island with a short drive.'
+      }
+    };
+
+    const langBtns = document.querySelectorAll('.lang-btn');
+    let currentLang = localStorage.getItem('lang') || 'tr';
+
+    function switchLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem('lang', lang);
+      langBtns.forEach(btn => btn.classList.remove('active'));
+      document.getElementById('lang' + lang.toUpperCase()).classList.add('active');
+      updatePageText(lang);
+    }
+
+    function updatePageText(lang) {
+      document.querySelectorAll('[data-text]').forEach(el => {
+        const key = el.getAttribute('data-text');
+        if(langData[lang][key]) {
+          el.textContent = langData[lang][key];
+        }
+      });
+    }
+
+    langBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        const lang = this.id.replace('lang', '').toLowerCase();
+        switchLanguage(lang);
+      });
+    });
+
+    switchLanguage(currentLang);
   </script>
 
 </body>
