@@ -1,11 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600">
-  <!-- Kırmızı arka plan -->
-  <rect width="900" height="600" fill="#CE1126"/>
-  
-  <!-- Beyaz ay -->
-  <circle cx="350" cy="300" r="120" fill="white"/>
-  <circle cx="380" cy="300" r="120" fill="#CE1126"/>
-  
-  <!-- Beyaz yıldız -->
-  <polygon points="550,200 565,255 622,255 575,295 590,350 550,310 510,350 525,295 478,255 535,255" fill="white"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20">
+  <!-- Kırmızı zemin -->
+  <rect width="30" height="20" fill="#E30A17"/>
+
+  <!-- Büyük beyaz daire (hilalin dış kısmı) -->
+  <circle cx="12" cy="10" r="6" fill="#FFFFFF"/>
+
+  <!-- Küçük kırmızı daire (hilali oluşturmak için kesme) -->
+  <circle cx="14" cy="10" r="5" fill="#E30A17"/>
+
+  <!-- Yıldız -->
+  <polygon fill="#FFFFFF"
+    points="
+    18,10
+    19.5,10.5
+    20,12
+    20.5,10.5
+    22,10
+    20.5,9.5
+    20,8
+    19.5,9.5
+    " />
 </svg>
