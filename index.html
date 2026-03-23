@@ -72,7 +72,7 @@ body {
 <div class="menu">
 <a href="dereboyu.html">Heart of Nicosia</a>
 <a href="kervansaray.html">Cosy Flat Next to Beach</a>
-<a href="#kibris">Things to Do in Cyprus</a>
+<a href="#kibris" data-i18n="things_to_do">Things to Do in Cyprus</a>
 </div>
 
 <!-- WELCOME -->
@@ -101,13 +101,13 @@ I am always available to help you.
 <!-- EMERGENCY -->
 <div class="card">
 <h2 data-i18n="emergency_h">🚨 Emergency Numbers</h2>
-<p><strong>Police:</strong> 155</p>
-<p><strong>Ambulance:</strong> 112</p>
-<p><strong>Fire Department:</strong> 199</p>
+<p><strong data-i18n="police">Police:</strong> 155</p>
+<p><strong data-i18n="ambulance">Ambulance:</strong> 112</p>
+<p><strong data-i18n="fire">Fire Department:</strong> 199</p>
 </div>
 
 <div class="card" id="kibris">
-<h2>📍 Things to Do in Cyprus</h2>
+<h2 data-i18n="things_to_do">📍 Things to Do in Cyprus</h2>
 
 <!-- ITEM -->
 <button class="accordion">🏰 St. Hilarion Castle</button>
@@ -182,15 +182,23 @@ const translations = {
     welcome_p: "Welcome to your stay! We are happy to host you 😊<br><br>On this page, you can find all the information you may need during your stay.<br><br>👉 Please select your apartment from the menu above to access detailed information about your place, including location, amenities, and house rules.",
     contact_h: "📞 Contact",
     contact_p: "If you need anything during your stay, feel free to contact me anytime.<br><br>I am always available to help you.",
-    emergency_h: "🚨 Emergency Numbers"
+    emergency_h: "🚨 Emergency Numbers",
+    police: "Police",
+    ambulance: "Ambulance",
+    fire: "Fire Department",
+    things_to_do: "Things to Do in Cyprus"
   },
-tr: {
-  welcome_h: "👋 Hoş Geldiniz",
-  welcome_p: "Konaklamanıza hoş geldiniz, sizi ağırlamaktan mutluluk duyuyoruz 😊<br><br>Bu sayfada kalışınız boyunca ihtiyaç duyabileceğiniz tüm bilgileri bulabilirsiniz.<br><br>👉 Lütfen yukarıdaki menüden dairenizi seçerek konum, özellikler ve ev kuralları gibi detaylara ulaşın.",
-  contact_h: "📞 İletişim",
-  contact_p: "Kalışınız boyunca herhangi bir şeye ihtiyaç duyarsanız, dilediğiniz zaman bana yazabilirsiniz.<br><br>Size yardımcı olmaktan memnuniyet duyarım.",
-  emergency_h: "🚨 Acil Durum Numaraları"
-}
+  tr: {
+    welcome_h: "👋 Hoş Geldiniz",
+    welcome_p: "Konaklamanıza hoş geldiniz, sizi ağırlamaktan mutluluk duyuyoruz 😊<br><br>Bu sayfada kalışınız boyunca ihtiyaç duyabileceğiniz tüm bilgileri bulabilirsiniz.<br><br>👉 Lütfen yukarıdaki menüden dairenizi seçerek konum, özellikler ve ev kuralları gibi detaylara ulaşın.",
+    contact_h: "📞 İletişim",
+    contact_p: "Kalışınız boyunca herhangi bir şeye ihtiyaç duyarsanız, dilediğiniz zaman bana yazabilirsiniz.<br><br>Size yardımcı olmaktan memnuniyet duyarım.",
+    emergency_h: "🚨 Acil Durum Numaraları",
+    police: "Polis",
+    ambulance: "Ambulans",
+    fire: "İtfaiye",
+    things_to_do: "Kıbrıs'ta Yapılacak Şeyler"
+  }
 };
 
 function changeLanguage(lang) {
