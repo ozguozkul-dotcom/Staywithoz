@@ -410,6 +410,9 @@
       background: rgba(255,255,255,0.04);
       color: var(--text);
       cursor: pointer;
+        display: inline-flex;
+  align-items: center;
+  gap: 6px;
       font-size: 13px;
       font-weight: 600;
       transition: all 0.2s ease;
@@ -421,6 +424,10 @@
       background: rgba(125,211,252,0.20);
       border-color: rgba(125,211,252,0.5);
     }
+    .lang-btn .flag{
+  display: block;
+  border-radius: 4px;
+}
   </style>
 
 </head>
@@ -434,12 +441,19 @@
          <span data-text="back-menu">Ana menüye dön</span>
         </a>
              <div style="display: flex; gap: 8px;">
-<button id="langTr" class="lang-btn active" title="Türkçe"><span style="margin-right:4px;">🇹🇷</span>TR</button>
-<button id="langEn" class="lang-btn" title="English"><span style="margin-right:4px;">🇬🇧</span>EN</button>
+<button id="langTr" class="lang-btn active" type="button" title="Türkçe" aria-label="Türkçe">
+  <img class="flag" src="assets/flags/tr.svg" alt="" width="18" height="18" loading="lazy">
+  <span class="lang-label">TUR</span>
+</button>
+
+<button id="langEn" class="lang-btn" type="button" title="English" aria-label="English">
+  <img class="flag" src="assets/flags/gb.svg" alt="" width="18" height="18" loading="lazy">
+  <span class="lang-label">ENG</span>
+</button>
 </div>
       </div>
 
-      <h1 class="title" data-text="location-title">Heart of Nicosia - Dereboyu</h1>
+      <h1 class="title" data-text="page-title">Heart of Nicosia - Dereboyu</h1>
      <p class="subtitle">Evin lokasyonu, giriş bilgileri ve temel kurallar</p>
 
       <div class="hero">
@@ -789,22 +803,24 @@
 
   // ========== LANGUAGE SWITCHING ==========
   const langData = {
-    tr: {
-      'back-menu': 'Ana menüye dön',
-      'location-title': '🏠 Evin Lokasyonu',
-      'entry-title': '🚪 Giriş Bilgisi',
-      'useful-title': '💡 Faydalı Bilgiler',
-      'rules-title': '📋 Evin Kuralları',
-      'about-title': '📍 Bu Lokasyon Hakkında',
-    },
-    en: {
-      'back-menu': 'Back to Main Menu',
-      'location-title': '🏠 House Location',
-      'entry-title': '🚪 Entry Information',
-      'useful-title': '💡 Useful Information',
-      'rules-title': '📋 House Rules',
-      'about-title': '📍 About This Location',
-    }
+ tr: {
+  'back-menu': 'Ana menüye dön',
+  'page-title': 'Heart of Nicosia - Dereboyu',
+  'location-title': '🏠 Evin Lokasyonu',
+  'entry-title': '🚪 Giriş Bilgisi',
+  'useful-title': '💡 Faydalı Bilgiler',
+  'rules-title': '📋 Evin Kuralları',
+  'about-title': '📍 Bu Lokasyon Hakkında',
+},
+en: {
+  'back-menu': 'Back to Main Menu',
+  'page-title': 'Heart of Nicosia - Dereboyu',
+  'location-title': '🏠 House Location',
+  'entry-title': '🚪 Entry Information',
+  'useful-title': '💡 Useful Information',
+  'rules-title': '📋 House Rules',
+  'about-title': '📍 About This Location',
+}
   };
 
   const langBtns = document.querySelectorAll('.lang-btn');
