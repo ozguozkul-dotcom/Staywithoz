@@ -53,12 +53,12 @@ body {
 <div class="header">
 <h1>🏡 StaywithOZ</h1>
 <div class="language-selector">
-<button onclick="changeLanguage('en')" class="lang-btn">
+<button onclick="changeLanguage('en', this)" class="lang-btn">
   <img class="flag" src="assets/flags/gb.svg" alt="English">
   ENG
 </button>
 
-<button onclick="changeLanguage('tr')" class="lang-btn">
+<button onclick="changeLanguage('tr', this)" class="lang-btn">
   <img class="flag" src="assets/flags/tr.svg" alt="Türkçe">
   TUR
 </button>
@@ -209,7 +209,7 @@ taxi_p: "Need a taxi or airport transfer?<br><br>📞 Call Taxi: +90 5XX XXX XXX
     contact_h: "📞 İletişim",
     contact_p: "Kalışınız boyunca herhangi bir şeye ihtiyaç duyarsanız, dilediğiniz zaman bana yazabilirsiniz.<br><br>Size yardımcı olmaktan memnuniyet duyarım.",
       taxi_h: "🚕 Taksi & Transfer",
-taxi_p: "Taksi veya havaalanı transferine mi ihtiyacınız var?<br><br>📞 Taksi: +90 5XX XXX XXXX<br>💬 WhatsApp: +90 5XX XXX XXXX<br><br>✈️ Ercan Havalimanı transferi mevcuttur<br>🚗 7/24 hizmet"
+taxi_p: "Taksi veya havaalanı transferine mi ihtiyacınız var?<br><br>📞 Taksi: +90 5XX XXX XXXX<br>💬 WhatsApp: +90 5XX XXX XXXX<br><br>✈️ Ercan Havalimanı transferi mevcuttur<br>🚗 7/24 hizmet",
     emergency_h: "🚨 Acil Durum Numaraları",
     police: "Polis",
     ambulance: "Ambulans",
@@ -218,25 +218,29 @@ taxi_p: "Taksi veya havaalanı transferine mi ihtiyacınız var?<br><br>📞 Tak
   }
 };
 
-function changeLanguage(lang) {
+function changeLanguage(lang, el) {
   localStorage.setItem('language', lang);
   document.documentElement.lang = lang;
   
   // Sayfayı güncelle
-  document.querySelectorAll('[data-i18n]').forEach(element => {
+   document.querySelectorAll('[data-i18n]').forEach(element => {
     const key = element.getAttribute('data-i18n');
-    element.innerHTML = translations[lang][key];
+    if (translations[lang] && translations[lang][key]) {
+      element.innerHTML = translations[lang][key];
+    }
   });
   
   // Buton aktifliğini göster
+  // aktif buton fix
   document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-  document.querySelector(`button[onclick="changeLanguage('${lang}')"]`).classList.add('active');
+  if (el) el.classList.add('active');
 }
 
 // Sayfa yükleme sırasında önceki dil seçimini hatırla
 window.onload = function() {
   const savedLang = localStorage.getItem('language') || 'en';
-  changeLanguage(savedLang);
+  const btn = document.querySelector(`.lang-btn[onclick*="${savedLang}"]`);
+changeLanguage(savedLang, btn);
 };
 
 function toggleMenu() {
