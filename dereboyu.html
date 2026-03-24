@@ -454,7 +454,7 @@
       </div>
 
       <h1 class="title" data-text="page-title">Heart of Nicosia - Dereboyu</h1>
-     <p class="subtitle">Evin lokasyonu, giriş bilgileri ve temel kurallar</p>
+     <p class="subtitle" data-text="subtitle">Evin lokasyonu, giriş bilgileri ve temel kurallar</p>
 
       <div class="hero">
         <div class="slider" id="slider" aria-label="Dereboyu fotoğraf slaytı">
@@ -486,18 +486,20 @@
           <div>
             <ul class="kv">
               <li>
-                <span class="k">Lokasyon</span>
-                <span class="v">
-                  Dairenin lokasyonu <b>Califorian Restaurant</b>'ın dibidir
-                </span>
+         <span class="k" data-text="loc-label-location">Lokasyon</s
+                      <span class="v">
+                 <span data-text="loc-desc-before">Dairenin lokasyonu</span>
+                   <b>Califorian Restaurant</b>
+                   <span data-text="loc-desc-after">'ın dibidir</span>
+                 </span>
               </li>
               <li>
-                <span class="k">Adres</span>
+              <span class="k" data-text="loc-label-address">Adres</span>
                 <span class="v">Hacı Ali Apartmanı, A Blok, Kat 3, Daire: 6</span>
               </li>
             </ul>
 
-            <h2 style="margin-top: 20px;">📍 Konum</h2>
+         <h2 style="margin-top: 20px;" data-text="loc-map-title">📍 Konum</h2>
 
             <iframe 
               src="https://www.google.com/maps?q=Califorian%20Restaurant&output=embed"
@@ -512,7 +514,7 @@
 
             <a href="https://www.google.com/maps/search/?api=1&query=Califorian+Restaurant" target="_blank" 
               style="display:inline-block; padding:10px 20px; background:black; color:white; border-radius:10px; text-decoration:none;">
-              📍 Yol Tarifi Al
+            <span data-text="loc-directions">📍 Yol Tarifi Al</span>
             </a>
 
           </div>
@@ -526,19 +528,15 @@
       <div class="accordion-content">
         <ul class="kv">
            <div class="note">
-              <b>Asansör notu:</b> Maalesef asansörümüz şu an için çalışmamaktadır. Bunun için özür dileriz.
+     <b data-text="entry-elevator-note-title">Asansör notu:</b> <span data-text="entry-elevator-note-text">Maalesef asansörümüz şu an için çalışmamaktadır. Bunun için özür dileriz.</span>
             </div>
           <li>
-           <span class="k">Anahtarları Nereden Alırım</span>
-            <span class="v">
-              Daireye geldiğinizde anahtarlar kapının yanındaki anahtar kutusunda olacaktır.
-              Anahtar kutusu şifresi misafirlere ayrıca bildirilecektir.
-              Aşağıdaki videodan nasıl açacağınızı izleyebilirsiniz.
-            </span>
+           <span class="k" data-text="entry-key-where">Anahtarları Nereden Alırım</span>
+        <span class="v" data-text="entry-keybox-desc">Daireye geldiğinizde anahtarlar kapının yanındaki anahtar kutusunda olacaktır. Anahtar kutusu şifresi misafirlere ayrıca bildirilecektir. Aşağıdaki videodan nasıl açacağınızı izleyebilirsiniz.</span>
           </li>
         </ul>
 
-        <h2 style="margin-top: 20px;">🚪 Daire Kapısı</h2>
+      <h2 style="margin-top: 20px;" data-text="entry-apartment-door-title">🚪 Daire Kapısı</h2>
 
         <div class="smallImagesContainer">
           <div class="smallImage">
@@ -548,27 +546,27 @@
             <img src="kapi2.jpg" alt="Daire kapısı">
           </div>
         </div>
-                <h2 style="margin-top: 20px;">🔑 Anahtar Kutusu</h2>
+      <h2 style="margin-top: 20px;" data-text="entry-keybox-title">🔑 Anahtar Kutusu</h2>
         <div class="inlineMedia">
           <img src="keybox.jpg" alt="Anahtar Kutusu">
-          <p class="caption">Anahtar Kutusu</p>
+        <p class="caption" data-text="caption-keybox">Anahtar Kutusu</p>
         </div>
-        <h2>🔑 Anahtar Teslimi</h2>
+       <h2 data-text="entry-key-handover-title">🔑 Anahtar Teslimi</h2>
 
 <p> 
-  Aşağıdaki videodan anahtar kutusunun kolayca nasıl açılacağını izleyebilirsiniz.
+<span data-text="entry-keybox-video-text">Aşağıdaki videodan anahtar kutusunun kolayca nasıl açılacağını izleyebilirsiniz.</span>
 </p>
 
 <div style="margin-top:20px;">
-  <iframe 
-    width="100%" 
-    height="400" 
-    src="https://www.youtube.com/embed/0VPj7odC9VU?is=oUEQ1nff4L_E4FsU
-    title="Anahtar Kutusu Kullanımı"
-    frameborder="0" 
-    allowfullscreen
-    style="border-radius:15px;">
-  </iframe>
+<iframe
+  width="100%"
+  height="400"
+  src="https://www.youtube.com/embed/0VPj7odC9VU?si=oUEQ1nff4L_E4FsU"
+  title="Anahtar Kutusu Kullanımı"
+  frameborder="0"
+  allowfullscreen
+  style="border-radius:15px;">
+</iframe>
 </div>
       </div>
     </div>
@@ -576,27 +574,27 @@
     <div class="accordion-item">
      <button class="accordion-title" data-text="useful-title">💡 Faydalı Bilgiler</button>
       <div class="accordion-content">
-                <h2 style="margin-top: 0;">📺 TV</h2>
-        <p>TV'de Netflix üyeliği vardır. Lütfen <b>"Guest"</b> kişisini seçerek oturum açınız. Herhangi bir problem yaşarsanız lütfen bize ulaşın.</p>
-                <h2 style="margin-top: 0;">🚿 Duşta Nasıl Sıcak Su Alırım?</h2>
-        <p><b>Sıcak su / duş:</b> Duşta sıcak su için sağ odada olan fişi açarak şofbeni kullanabilirsiniz.</p>
+     <h2 style="margin-top: 0;" data-text="useful-tv-title">📺 TV</h2>
+     <p data-text="useful-tv-netflix">TV'de Netflix üyeliği vardır. Lütfen <b>"Guest"</b> kişisini seçerek oturum açınız. Herhangi bir problem yaşarsanız lütfen bize ulaşın.</p>
+     <h2 style="margin-top: 0;" data-text="useful-hotwater-title">🚿 Duşta Nasıl Sıcak Su Alırım?</h2>
+     <p data-text="useful-hotwater-text"><b>Sıcak su / duş:</b> Duşta sıcak su için sağ odada olan fişi açarak şofbeni kullanabilirsiniz.</p>
         <div class="inlineMedia">
           <img src="su.jpg" alt="Şofben için kullanılacak fişin olduğu bölüm">
-          <p class="caption">Sıcak su için şofben fişi</p>
+       <p class="caption" data-text="caption-hotwater-plug">Sıcak su için şofben fişi</p>
         </div>
         
-                <h2 style="margin-top: 0;">📶 WiFi Bilgileri</h2>
-        <p><b>WIFI:</b> OZ</p>
-        <p><b>Şifre:</b> Misafirlere WhatsApp aracılığı ile bildirilecektir</p>
+   <h2 style="margin-top: 0;" data-text="useful-wifi-title">📶 WiFi Bilgileri</h2>
+  <p data-text="useful-wifi-name">WIFI: OZ</p>
+    <p data-text="useful-wifi-pass">Şifre: Misafirlere WhatsApp aracılığı ile bildirilecektir</p>
         
-              <h2 style="margin-top: 0;">Asla Kapanmaması Gereken Fişler</h2>
+         <h2 style="margin-top: 0;" data-text="useful-plugs-title">Asla Kapanmaması Gereken Fişler</h2>
         
                <!-- Priz 1 -->
         <div style="text-align: center; margin-bottom: 20px;">
           <div class="inlineMedia" style="display: inline-block;">
             <img src="priz1.jpg" alt="Priz 1">
-            <p class="caption"><b>Ortadaki priz hiç kapanmayacak</b></p>
-            <p class="caption"><b>En soldaki çamaşır makinesi içindir</b></p>
+        <p class="caption" data-text="useful-plug1-caption1"><b>Ortadaki priz hiç kapanmayacak</b></p>
+      <p class="caption" data-text="useful-plug1-caption2"><b>En soldaki çamaşır makinesi içindir</b></p>
           </div>
         </div>
         
@@ -630,7 +628,7 @@
 
         <div class="inlineMedia">
           <img id="copImg" src="cop.png" alt="Çöp konteynerlerinin yeri">
-          <p class="caption">çöp konteynerlerinin yeri</p>
+    <p class="caption" data-text="caption-trash">çöp konteynerlerinin yeri</p>
         </div>
 
       
@@ -811,6 +809,38 @@
   'useful-title': '💡 Faydalı Bilgiler',
   'rules-title': '📋 Evin Kuralları',
   'about-title': '📍 Bu Lokasyon Hakkında',
+     'subtitle': 'Evin lokasyonu, giriş bilgileri ve temel kurallar',
+
+  'loc-label-location': 'Lokasyon',
+  'loc-desc-before': 'Dairenin lokasyonu',
+  'loc-desc-after': "'ın dibidir",
+  'loc-label-address': 'Adres',
+  'loc-map-title': '📍 Konum',
+  'loc-directions': '📍 Yol Tarifi Al',
+
+  'entry-elevator-note-title': 'Asansör notu:',
+  'entry-elevator-note-text': 'Maalesef asansörümüz şu an için çalışmamaktadır. Bunun için özür dileriz.',
+  'entry-key-where': 'Anahtarları Nereden Alırım',
+  'entry-keybox-desc': 'Daireye geldiğinizde anahtarlar kapının yanındaki anahtar kutusunda olacaktır. Anahtar kutusu şifresi misafirlere ayrıca bildirilecektir. Aşağıdaki videodan nasıl açacağınızı izleyebilirsiniz.',
+  'entry-apartment-door-title': '🚪 Daire Kapısı',
+  'entry-keybox-title': '🔑 Anahtar Kutusu',
+  'caption-keybox': 'Anahtar Kutusu',
+  'entry-key-handover-title': '🔑 Anahtar Teslimi',
+  'entry-keybox-video-text': 'Aşağıdaki videodan anahtar kutusunun kolayca nasıl açılacağını izleyebilirsiniz.',
+
+  'useful-tv-title': '📺 TV',
+  'useful-tv-netflix': `TV'de Netflix üyeliği vardır. Lütfen "Guest" kişisini seçerek oturum açınız. Herhangi bir problem yaşarsanız lütfen bize ulaşın.`,
+  'useful-hotwater-title': '🚿 Duşta Nasıl Sıcak Su Alırım?',
+  'useful-hotwater-text': 'Sıcak su / duş: Duşta sıcak su için sağ odada olan fişi açarak şofbeni kullanabilirsiniz.',
+  'caption-hotwater-plug': 'Sıcak su için şofben fişi',
+  'useful-wifi-title': '📶 WiFi Bilgileri',
+  'useful-wifi-name': 'WIFI: OZ',
+  'useful-wifi-pass': 'Şifre: Misafirlere WhatsApp aracılığı ile bildirilecektir',
+  'useful-plugs-title': 'Asla Kapanmaması Gereken Fişler',
+  'useful-plug1-caption1': 'Ortadaki priz hiç kapanmayacak',
+  'useful-plug1-caption2': 'En soldaki çamaşır makinesi içindir',
+
+  'caption-trash': 'çöp konteynerlerinin yeri',
 },
 en: {
   'back-menu': 'Back to Main Menu',
@@ -820,6 +850,39 @@ en: {
   'useful-title': '💡 Useful Information',
   'rules-title': '📋 House Rules',
   'about-title': '📍 About This Location',
+    'subtitle': 'Location, entry instructions, and house rules',
+
+  'loc-label-location': 'Location',
+  'loc-desc-before': 'The apartment is located right next to',
+  'loc-desc-after': '',
+  'loc-label-address': 'Address',
+  'loc-map-title': '📍 Location',
+  'loc-directions': '📍 Get Directions',
+
+  'entry-elevator-note-title': 'Elevator note:',
+  'entry-elevator-note-text': 'Unfortunately, the elevator is currently not working. We apologize for the inconvenience.',
+  'entry-key-where': 'Where do I get the keys?',
+  'entry-keybox-desc': 'When you arrive, the keys will be in the key lockbox next to the door. The lockbox code will be shared with guests separately. You can watch the video below to see how to open it.',
+  'entry-apartment-door-title': '🚪 Apartment Door',
+  'entry-keybox-title': '🔑 Key Lockbox',
+  'caption-keybox': 'Key Lockbox',
+  'entry-key-handover-title': '🔑 Key Pickup',
+  'entry-keybox-video-text': 'You can watch the video below to see how to open the lockbox easily.',
+
+  'useful-tv-title': '📺 TV',
+  'useful-tv-netflix': 'Netflix is available on the TV. Please select the "Guest" profile to sign in. If you have any issues, please contact us.',
+  'useful-hotwater-title': '🚿 How do I get hot water for the shower?',
+  'useful-hotwater-text': 'Hot water / shower: To get hot water, turn on the plug in the room on the right to use the water heater.',
+  'caption-hotwater-plug': 'Water heater plug for hot water',
+  'useful-wifi-title': '📶 Wi‑Fi Information',
+  'useful-wifi-name': 'Wi‑Fi: OZ',
+  'useful-wifi-pass': 'Password: Will be shared with guests via WhatsApp',
+  'useful-plugs-title': 'Plugs That Must Always Stay On',
+  'useful-plug1-caption1': 'The middle plug must never be turned off',
+  'useful-plug1-caption2': 'The leftmost plug is for the washing machine',
+
+  'caption-trash': 'Location of the trash containers',
+  
 }
   };
 
