@@ -234,7 +234,7 @@ function changeLanguage(lang) {
   
   // Buton aktifliğini göster
   document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-  event.target.classList.add('active');
+  document.querySelector(`button[onclick="changeLanguage('${lang}')"]`).classList.add('active');
 }
 
 // Sayfa yükleme sırasında önceki dil seçimini hatırla
