@@ -1015,7 +1015,7 @@ en: {
     
     // Update buttons
     langBtns.forEach(btn => btn.classList.remove('active'));
-    const activeBtn = document.getElementById('lang' + lang.toUpperCase());
+   const activeBtn = document.querySelector('.lang-btn[id="lang' + lang + '"]');
     if(activeBtn) activeBtn.classList.add('active');
     
     // Update text
