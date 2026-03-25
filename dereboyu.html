@@ -1008,19 +1008,23 @@ en: {
     });
   }
 
-  function switchLanguage(lang) {
-    if(!langData[lang]) return;
-    
-    currentLang = lang;
-    localStorage.setItem('lang', lang);
-    
-    // Update buttons
-    langBtns.forEach(btn => btn.classList.remove('active'));
-   const activeBtn = document.querySelector('.lang-btn[id="lang' + lang + '"]');
-    if(activeBtn) activeBtn.classList.add('active');
-    
-    // Update text
-    updatePageText(lang);
+ function switchLanguage(lang) {
+  if(!langData[lang]) return;
+  
+  currentLang = lang;
+  localStorage.setItem('lang', lang);
+  
+  // Update buttons
+  langBtns.forEach(btn => {
+    if(btn.id.toLowerCase() === ('lang' + lang)) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+  
+  // Update text
+  updatePageText(lang);
   }
 
   // Add click listeners
