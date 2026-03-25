@@ -122,16 +122,18 @@ text-align:center;
 box-shadow:0 3px 10px rgba(0,0,0,0.2);
 ">
 
-  <h3 style="margin-bottom:10px;">💱 Güncel Kurlar</h3>
+  <h3 id="title" style="margin-bottom:10px;">💱 Güncel Kurlar</h3>
 
-  <p>🇬🇧 1 GBP = <span id="gbp">...</span> TRY</p>
-  <p>🇪🇺 1 EUR = <span id="eur">...</span> TRY</p>
-  <p>🇺🇸 1 USD = <span id="usd">...</span> TRY</p>
+  <p>🇬🇧 £ 1 GBP = <span id="gbp">...</span> ₺</p>
+  <p>🇪🇺 € 1 EUR = <span id="eur">...</span> ₺</p>
+  <p>🇺🇸 $ 1 USD = <span id="usd">...</span> ₺</p>
 
   <small id="updateTime" style="opacity:0.7;"></small>
 </div>
 
 <script>
+const lang = document.documentElement.lang || "tr";
+
 async function loadRates() {
   try {
     const res = await fetch("https://api.exchangerate-api.com/v4/latest/TRY");
@@ -141,25 +143,31 @@ async function loadRates() {
     document.getElementById("eur").innerText = (1 / data.rates.EUR).toFixed(2);
     document.getElementById("usd").innerText = (1 / data.rates.USD).toFixed(2);
 
-    // Saat bilgisi
     const now = new Date();
-    const timeString = now.toLocaleTimeString("tr-TR", {
+
+    let text = "";
+    let timeString = now.toLocaleTimeString(lang === "tr" ? "tr-TR" : "en-GB", {
       hour: "2-digit",
       minute: "2-digit"
     });
 
-    document.getElementById("updateTime").innerText =
-      "Son güncelleme: " + timeString;
+    if (lang === "tr") {
+      text = "Son güncelleme: " + timeString;
+      document.getElementById("title").innerText = "💱 Güncel Kurlar";
+    } else {
+      text = "Last update: " + timeString;
+      document.getElementById("title").innerText = "💱 Live Exchange Rates";
+    }
+
+    document.getElementById("updateTime").innerText = text;
 
   } catch (e) {
-    document.getElementById("ratesBox").innerHTML = "Kur bilgisi alınamadı";
+    document.getElementById("ratesBox").innerHTML = 
+      (lang === "tr") ? "Kur bilgisi alınamadı" : "Failed to load rates";
   }
 }
 
-// İlk yükleme
 loadRates();
-
-// 10 dakikada bir güncelle
 setInterval(loadRates, 600000);
 </script>
   
