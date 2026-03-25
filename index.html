@@ -110,6 +110,61 @@ Need a taxi or airport transfer?<br><br>
 💬 WhatsApp
 </a>
 </div>
+
+<div style="max-width:320px; margin:25px auto; padding:15px; border-radius:12px; background:#f8f8f8; box-shadow:0 2px 8px rgba(0,0,0,0.1); text-align:center;">
+  
+  <h3 style="margin-bottom:10px;">💱 Döviz Çevirici</h3>
+
+  <input type="number" id="amount" placeholder="Miktar" 
+  style="width:100%; padding:8px; margin-bottom:10px; border-radius:8px; border:1px solid #ccc;">
+
+  <select id="from" style="width:100%; padding:8px; margin-bottom:10px; border-radius:8px;">
+    <option value="USD">USD</option>
+    <option value="EUR">EUR</option>
+    <option value="TRY">TRY</option>
+    <option value="GBP">GBP</option>
+  </select>
+
+  <select id="to" style="width:100%; padding:8px; margin-bottom:10px; border-radius:8px;">
+    <option value="TRY">TRY</option>
+    <option value="USD">USD</option>
+    <option value="EUR">EUR</option>
+    <option value="GBP">GBP</option>
+  </select>
+
+  <button onclick="convertCurrency()" 
+  style="width:100%; padding:10px; border:none; border-radius:8px; background:#222; color:white;">
+    Çevir
+  </button>
+
+  <p id="result" style="margin-top:10px; font-weight:bold;"></p>
+</div>
+
+<script>
+async function convertCurrency() {
+  const amount = document.getElementById("amount").value;
+  const from = document.getElementById("from").value;
+  const to = document.getElementById("to").value;
+
+  if (!amount) {
+    document.getElementById("result").innerText = "Miktar gir";
+    return;
+  }
+
+  try {
+    const res = await fetch(`https://api.exchangerate-api.com/v4/latest/${from}`);
+    const data = await res.json();
+
+    const rate = data.rates[to];
+    const result = amount * rate;
+
+    document.getElementById("result").innerText =
+      `${amount} ${from} = ${result.toFixed(2)} ${to}`;
+  } catch (error) {
+    document.getElementById("result").innerText = "Bağlantı hatası";
+  }
+}
+</script>
   
 <!-- EMERGENCY -->
 <div class="card">
