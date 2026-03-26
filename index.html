@@ -404,9 +404,8 @@ function changeLanguage(lang, el) {
     
     const currentLangDivs = document.querySelectorAll('div[class="' + lang + '"]');
     currentLangDivs.forEach(el => el.style.display = 'block');
+loadRates();
 }
-
-  loadRates();
   
 // Sayfa yükleme sırasında önceki dil seçimini hatırla
 window.onload = function() {
