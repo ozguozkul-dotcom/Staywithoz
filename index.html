@@ -229,27 +229,47 @@ setInterval(loadRates, 600000);
 </div>
 
 <div id="ratesBox" style="
-max-width:320px;
-margin:25px auto;
-padding:18px;
-border-radius:14px;
-background:linear-gradient(135deg, #f0f9ff, #e0f2fe);
+max-width:420px;
+margin:30px 0;
+padding:20px;
+border-radius:16px;
+background:#ffffff;
 color:#111;
-text-align:center;
-box-shadow:0 6px 18px rgba(0,0,0,0.15);
+box-shadow:0 8px 25px rgba(0,0,0,0.08);
 font-family:Arial, sans-serif;
-border:1px solid #dbeafe;
+border:1px solid #eee;
 ">
 
-  <h3 id="title" style="margin-bottom:12px; font-size:18px;">
+  <h3 id="title" style="
+  margin-bottom:15px; 
+  font-size:18px; 
+  display:flex; 
+  align-items:center; 
+  gap:8px;">
     💱 Exchange Rates
   </h3>
 
-  <p style="margin:8px 0;">1 USD ($) = <span id="usd">...</span> ₺</p>
-  <p style="margin:8px 0;">1 EUR (€) = <span id="eur">...</span> ₺</p>
-  <p style="margin:8px 0;">1 GBP (£) = <span id="gbp">...</span> ₺</p>
+  <div style="display:flex; justify-content:space-between; margin:10px 0;">
+    <span>USD ($)</span>
+    <strong>1 = <span id="usd">...</span> ₺</strong>
+  </div>
 
-  <small id="updateTime" style="opacity:0.7; display:block; margin-top:10px;"></small>
+  <div style="display:flex; justify-content:space-between; margin:10px 0;">
+    <span>EUR (€)</span>
+    <strong>1 = <span id="eur">...</span> ₺</strong>
+  </div>
+
+  <div style="display:flex; justify-content:space-between; margin:10px 0;">
+    <span>GBP (£)</span>
+    <strong>1 = <span id="gbp">...</span> ₺</strong>
+  </div>
+
+  <small id="updateTime" style="
+  opacity:0.6; 
+  display:block; 
+  margin-top:12px;">
+  </small>
+
 </div>
   
 <div class="card" id="kibris">
