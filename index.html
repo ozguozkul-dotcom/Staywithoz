@@ -367,13 +367,12 @@ function changeLanguage(lang, el) {
   document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
   if (el) el.classList.add('active');
      
-   // Dil bölümlerini göster/gizle
-   document.querySelectorAll('.en, .tr').forEach(element => {
-     element.style.display = 'none';
-   });
-   document.querySelectorAll('.' + lang).forEach(element => {
-     element.style.display = 'block';
-   });
+        // Dil bölümlerini göster/gizle
+    const allLangDivs = document.querySelectorAll('div[class="en"], div[class="tr"]');
+    allLangDivs.forEach(el => el.style.display = 'none');
+    
+    const currentLangDivs = document.querySelectorAll('div[class="' + lang + '"]');
+    currentLangDivs.forEach(el => el.style.display = 'block');
 }
 
 // Sayfa yükleme sırasında önceki dil seçimini hatırla
