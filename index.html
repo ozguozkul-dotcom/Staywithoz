@@ -406,6 +406,8 @@ function changeLanguage(lang, el) {
     currentLangDivs.forEach(el => el.style.display = 'block');
 }
 
+  loadRates();
+  
 // Sayfa yükleme sırasında önceki dil seçimini hatırla
 window.onload = function() {
   const savedLang = localStorage.getItem('language') || 'en';
