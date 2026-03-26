@@ -150,9 +150,9 @@ async function loadRates() {
     const res = await fetch("https://api.exchangerate-api.com/v4/latest/TRY");
     const data = await res.json();
 
-    document.getElementById("gbp").innerText = (1 / data.rates.GBP).toFixed(2);
-    document.getElementById("eur").innerText = (1 / data.rates.EUR).toFixed(2);
-    document.getElementById("usd").innerText = (1 / data.rates.USD).toFixed(2);
+document.getElementById("gbp").innerHTML = (1 / data.rates.GBP).toFixed(2) + ' <span style="font-size:0.9em;">£</span>';
+document.getElementById("eur").innerHTML = (1 / data.rates.EUR).toFixed(2) + ' <span style="font-size:0.9em;">€</span>';
+document.getElementById("usd").innerHTML = (1 / data.rates.USD).toFixed(2) + ' <span style="font-size:0.9em;">$</span>';
 
     const now = new Date();
 
