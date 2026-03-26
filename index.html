@@ -229,40 +229,47 @@ setInterval(loadRates, 600000);
 </div>
 
 <div id="ratesBox" style="
-max-width:420px;
+max-width:400px;
 margin:30px 0;
 padding:20px;
-border-radius:16px;
-background:#ffffff;
+border-radius:18px;
+background:linear-gradient(135deg, #ffffff, #f8fafc);
 color:#111;
-box-shadow:0 8px 25px rgba(0,0,0,0.08);
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
 font-family:Arial, sans-serif;
-border:1px solid #eee;
+border:1px solid #e5e7eb;
 ">
 
   <h3 id="title" style="
   margin-bottom:15px; 
   font-size:18px; 
-  display:flex; 
-  align-items:center; 
-  gap:8px;">
+  font-weight:600;">
     💱 Exchange Rates
   </h3>
 
-  <div style="display:flex; justify-content:space-between; margin:10px 0;">
-    <span>USD ($)</span>
-    <strong>1 = <span id="usd">...</span> ₺</strong>
-  </div>
+  <p style="
+  margin:10px 0;
+  padding:10px;
+  border-radius:10px;
+  background:#f1f5f9;">
+    1 USD ($) = <strong><span id="usd">...</span> ₺</strong>
+  </p>
 
-  <div style="display:flex; justify-content:space-between; margin:10px 0;">
-    <span>EUR (€)</span>
-    <strong>1 = <span id="eur">...</span> ₺</strong>
-  </div>
+  <p style="
+  margin:10px 0;
+  padding:10px;
+  border-radius:10px;
+  background:#f1f5f9;">
+    1 EUR (€) = <strong><span id="eur">...</span> ₺</strong>
+  </p>
 
-  <div style="display:flex; justify-content:space-between; margin:10px 0;">
-    <span>GBP (£)</span>
-    <strong>1 = <span id="gbp">...</span> ₺</strong>
-  </div>
+  <p style="
+  margin:10px 0;
+  padding:10px;
+  border-radius:10px;
+  background:#f1f5f9;">
+    1 GBP (£) = <strong><span id="gbp">...</span> ₺</strong>
+  </p>
 
   <small id="updateTime" style="
   opacity:0.6; 
@@ -271,6 +278,7 @@ border:1px solid #eee;
   </small>
 
 </div>
+  
   
 <div class="card" id="kibris">
 <h2 data-i18n="things_to_do">📍 Places to See in Cyprus</h2>
