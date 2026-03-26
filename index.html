@@ -379,7 +379,14 @@ function changeLanguage(lang, el) {
 window.onload = function() {
   const savedLang = localStorage.getItem('language') || 'en';
   const btn = document.querySelector(`.lang-btn[onclick*="${savedLang}"]`);
-changeLanguage(savedLang, btn);
+  changeLanguage(savedLang, btn);
+  
+  // Sayfa yüklendiğinde dil bölümlerini ayarla
+  const allLangDivs = document.querySelectorAll('div[class="en"], div[class="tr"]');
+  allLangDivs.forEach(el => el.style.display = 'none');
+  
+  const currentLangDivs = document.querySelectorAll('div[class="' + savedLang + '"]');
+  currentLangDivs.forEach(el => el.style.display = 'block');
 };
 
 function toggleMenu() {
