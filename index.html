@@ -45,6 +45,22 @@ body {
   display: inline-block;
   border-radius: 2px;
 }
+  .rental-link {
+   color: #25D366;
+   text-decoration: none;
+   font-weight: bold;
+   border-bottom: 2px solid #25D366;
+   transition: all 0.3s ease;
+   display: inline-block;
+   padding-bottom: 2px;
+}
+
+.rental-link:hover {
+   background-color: #25D366;
+   color: white;
+   border-radius: 5px;
+   padding: 2px 8px;
+}
 </style>
 </head>
 
@@ -187,7 +203,7 @@ setInterval(loadRates, 600000);
 </script>
 
 <section style="margin-top:30px;">
-  <h3>🚗 Car Rental / Araç Kiralama</h3>
+ <h3 data-i18n="car_rental_h">🚗 Car Rental</h3>
 
   <!-- ENGLISH -->
   <div class="en">
@@ -196,9 +212,9 @@ setInterval(loadRates, 600000);
     </p>
 
     <ul>
-      <li><a href="https://www.sunrentacar.com" target="_blank">Sun Rent A Car</a></li>
-      <li><a href="https://www.ercanairportrentacar.com" target="_blank">Ercan Airport Rent A Car</a></li>
-      <li><a href="https://www.garentarental.com" target="_blank">Garenta Cyprus</a></li>
+     <li><a href="https://www.sunrentacar.com" target="_blank" class="rental-link">Sun Rent A Car</a></li>
+     <li><a href="https://www.ercanairportrentacar.com" target="_blank" class="rental-link">Ercan Airport Rent A Car</a></li>
+      <li><a href="https://www.garentarental.com" target="_blank" class="rental-link">Garenta Cyprus</a></li>
     </ul>
 
     <p style="font-size:13px; opacity:0.8; margin-top:10px;">
@@ -213,9 +229,9 @@ setInterval(loadRates, 600000);
     </p>
 
     <ul>
-      <li><a href="https://www.sunrentacar.com" target="_blank">Sun Rent A Car</a></li>
-      <li><a href="https://www.ercanairportrentacar.com" target="_blank">Ercan Airport Rent A Car</a></li>
-      <li><a href="https://www.garentarental.com" target="_blank">Garenta Kıbrıs</a></li>
+     <li><a href="https://www.sunrentacar.com" target="_blank" class="rental-link">Sun Rent A Car</a></li>
+  <li><a href="https://www.ercanairportrentacar.com" target="_blank" class="rental-link">Ercan Airport Rent A Car</a></li>
+ <li><a href="https://www.garentarental.com" target="_blank" class="rental-link">Garenta Kıbrıs</a></li>
     </ul>
 
     <p style="font-size:13px; opacity:0.8; margin-top:10px;">
@@ -316,6 +332,7 @@ taxi_p: "Need a taxi or airport transfer?<br><br>📞 Call Taxi:+90 5338480101<b
     ambulance: "Ambulance",
     fire: "Fire Department",
    things_to_do: "Places to See in Cyprus"
+    car_rental_h: "🚗 Araç Kiralama",
   },
   tr: {
     welcome_h: "👋 Hoş Geldiniz",
@@ -329,6 +346,7 @@ taxi_p: "Taksi veya havaalanı transferine mi ihtiyacınız var?<br><br>📞 Tak
     ambulance: "Ambulans",
     fire: "İtfaiye",
   things_to_do: "Kıbrıs'ta Görülecek Yerler"
+  car_rental_h: "🚗 Araç Kiralama",
   }
 };
 
