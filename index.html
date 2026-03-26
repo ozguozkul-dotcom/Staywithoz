@@ -332,7 +332,7 @@ taxi_p: "Need a taxi or airport transfer?<br><br>📞 Call Taxi:+90 5338480101<b
     ambulance: "Ambulance",
     fire: "Fire Department",
    things_to_do: "Places to See in Cyprus"
-    car_rental_h: "🚗 Araç Kiralama",
+    car_rental_h: "🚗 Car Rental",
   },
   tr: {
     welcome_h: "👋 Hoş Geldiniz",
@@ -346,7 +346,7 @@ taxi_p: "Taksi veya havaalanı transferine mi ihtiyacınız var?<br><br>📞 Tak
     ambulance: "Ambulans",
     fire: "İtfaiye",
   things_to_do: "Kıbrıs'ta Görülecek Yerler"
-  car_rental_h: "🚗 Araç Kiralama",
+    car_rental_h: "🚗 Araç Kiralama",
   }
 };
 
@@ -366,6 +366,14 @@ function changeLanguage(lang, el) {
   // aktif buton fix
   document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
   if (el) el.classList.add('active');
+     
+   // Dil bölümlerini göster/gizle
+   document.querySelectorAll('.en, .tr').forEach(element => {
+     element.style.display = 'none';
+   });
+   document.querySelectorAll('.' + lang).forEach(element => {
+     element.style.display = 'block';
+   });
 }
 
 // Sayfa yükleme sırasında önceki dil seçimini hatırla
