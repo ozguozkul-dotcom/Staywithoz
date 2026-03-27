@@ -489,32 +489,5 @@ function loadVisitorStats() {
 loadVisitorStats();
 </script>
 
-</script>
-  </div>
-
-<script>
-function loadVisitorStats() {
-  let today = new Date().toDateString();
-  let statsKey = "visitor_visited_" + today;
-  let totalKey = "visitor_total";
-  
-  let grandTotal = parseInt(localStorage.getItem(totalKey)) || 0;
-  let visitedToday = localStorage.getItem(statsKey);
-  
-  if (!visitedToday) {
-    grandTotal++;
-    localStorage.setItem(totalKey, grandTotal);
-    localStorage.setItem(statsKey, "true");
-  }
-  
-  document.getElementById("totalViews").innerText = "👀 " + grandTotal + " total people visited";
-  document.getElementById("topCountries").innerHTML = "📊 All-time counter";
-}
-
-loadVisitorStats();
-</script>
-
-</body>
-</html>
 </body>
 </html>
