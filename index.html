@@ -466,14 +466,17 @@ font-family:Arial;
 
 <script>
 var counterContainer = document.querySelector(".website-counter");
-var visitCount = localStorage.getItem("page_view");
+var today = new Date().toDateString();
+var lastVisit = localStorage.getItem("last_visit_date");
+var visitCount = parseInt(localStorage.getItem("page_view")) || 0;
 
-if (visitCount) {
-  visitCount = Number(visitCount) + 1;
-} else {
-  visitCount = 1;
+// Eğer bugün ziyaret edilmemiş ise +1 yap
+if (lastVisit !== today) {
+  visitCount++;
+  localStorage.setItem("page_view", visitCount);
+  localStorage.setItem("last_visit_date", today);
 }
-localStorage.setItem("page_view", visitCount);
+
 counterContainer.innerHTML = visitCount;
 </script>
   
