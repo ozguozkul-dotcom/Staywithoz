@@ -467,27 +467,8 @@ font-family:Arial;
 
 </div>
 
-<script>
-function loadVisitorStats() {
-  let today = new Date().toDateString();
-  let visitKey = "visited_" + today;
-  let countKey = "total_visitors";
-  
-  // Bugün bu tarayıcıdan ziyaret ettim mi?
-  if (!localStorage.getItem(visitKey)) {
-    let count = parseInt(localStorage.getItem(countKey)) || 0;
-    count++;
-    localStorage.setItem(countKey, count);
-    localStorage.setItem(visitKey, "true");
-  }
-  
-  let count = parseInt(localStorage.getItem(countKey)) || 0;
-  document.getElementById("totalViews").innerText = "👀 " + count + " visits";
-  document.getElementById("topCountries").innerHTML = "📊 Counter";
-}
-
-loadVisitorStats();
-</script>
+<script type='text/javascript' src='https://www.freevisitorcounters.com/auth.php?id=32ebd50796e0e397714ce8b315233098ab22af61'></script>
+<script type="text/javascript" src="https://www.freevisitorcounters.com/en/home/counter/1524081/t/0"></script>
 
 </body>
 </html>
