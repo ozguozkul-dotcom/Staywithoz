@@ -468,47 +468,33 @@ font-family:Arial;
 </div>
 
 <script>
-function loadVisitorStats() {
-  console.log("=== VISITOR STATS START ===");
-  
+async function loadVisitorStats() {
+
   let today = new Date().toDateString();
   let visitKey = "visited_" + today;
-  
-  console.log("1. Today:", today);
-  console.log("2. VisitKey:", visitKey);
-  console.log("3. Already visited today?", localStorage.getItem(visitKey));
-  
+
+  const namespace = "staywithoz_real_counter";
+
+  // Eğer bugün sayılmadıysa → arttır
   if (!localStorage.getItem(visitKey)) {
-    console.log("4. First visit today - incrementing...");
-    
-    let count = localStorage.getItem("total_count");
-    console.log("5. Raw total_count:", count);
-    
-    count = parseInt(count) || 0;
-    console.log("6. Parsed count:", count);
-    
-    count++;
-    console.log("7. After increment:", count);
-    
-    try {
-      localStorage.setItem("total_count", count);
-      console.log("8. Saved to localStorage");
-    } catch (e) {
-      console.error("9. SAVE ERROR:", e);
-    }
-    
+
+    await fetch(`https://api.countapi.xyz/hit/${namespace}/total`);
+
     localStorage.setItem(visitKey, "true");
-    console.log("10. Set visit flag for today");
-  } else {
-    console.log("11. Already visited today - skipping increment");
   }
-  
-  let finalCount = parseInt(localStorage.getItem("total_count")) || 0;
-  console.log("12. Final count:", finalCount);
-  console.log("=== VISITOR STATS END ===");
-  
-  document.getElementById("totalViews").innerText = "👀 " + finalCount + " visits";
-  document.getElementById("topCountries").innerHTML = "📊 Counter";
+
+  // Toplamı çek
+  const res = await fetch(`https://api.countapi.xyz/get/${namespace}/total`);
+  const data = await res.json();
+
+  let total = data.value || 0;
+
+  document.getElementById("totalViews").innerText =
+    "👀 " + total + " people viewed this property";
+
+  document.getElementById("topCountries").innerHTML =
+    "📊 Live counter";
+
 }
 
 loadVisitorStats();
