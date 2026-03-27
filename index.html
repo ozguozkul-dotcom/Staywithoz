@@ -538,8 +538,8 @@ async function loadVisitorStats() {
     document.getElementById("topCountries").innerHTML = html;
 
 } catch (e) {
-     console.error("🔴 Visitor Stats Hatası:", e);
-     document.getElementById("totalViews").innerText = "Stats unavailable";
+     console.error("🔴 Visitor Stats Error:", e.message);
+     document.getElementById("totalViews").innerText = "Stats unavailable - Error: " + e.message;
    }
 }
 
