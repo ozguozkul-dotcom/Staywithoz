@@ -488,49 +488,6 @@ function loadVisitorStats() {
 
 loadVisitorStats();
 </script>
-  
-  <script>
-async function loadVisitorStats() {
-  try {
-    const geoRes = await fetch("https://ipwho.is/");
-    const geoData = await geoRes.json();
-    const country = geoData.country || "Unknown";
-    
-    const namespace = "staywithoz_2026";
-    const totalRes = await fetch(`https://api.countapi.xyz/hit/${namespace}/total`);
-    const totalData = await totalRes.json();
-    
-    const countryKey = country.replace(/\s+/g, "_");
-    await fetch(`https://api.countapi.xyz/hit/${namespace}/${countryKey}`);
-    
-    const countries = ["Turkey","United States","Germany","France","Italy","Spain","Netherlands","Belgium","Austria","Poland","Sweden","Denmark","Finland","Ireland","Portugal","Greece"];
-    
-    let results = [];
-    for (let c of countries) {
-      let key = c.replace(/\s+/g, "_");
-      let res = await fetch(`https://api.countapi.xyz/get/${namespace}/${key}`);
-      let data = await res.json();
-      results.push({ name: c, value: data.value || 0 });
-    }
-    
-    results.sort((a, b) => b.value - a.value);
-    const top3 = results.slice(0, 3);
-    
-    document.getElementById("totalViews").innerText = "👀 " + totalData.value + "+ people viewed this property";
-    let html = "<b>Top Countries</b><br>";
-    top3.forEach((c, i) => {
-      html += `${i+1}. ${c.name} — ${c.value}<br>`;
-    });
-    document.getElementById("topCountries").innerHTML = html;
-    
-  } catch (e) {
-    console.error("Error:", e);
-  }
-}
-
-loadVisitorStats();
-setInterval(loadVisitorStats, 300000);
-</script>
 
 </script>
   
