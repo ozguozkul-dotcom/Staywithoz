@@ -470,25 +470,26 @@ font-family:Arial;
 <script>
 function loadVisitorStats() {
   let today = new Date().toDateString();
-  let statsKey = "visitor_total_" + today;
+  let statsKey = "visitor_visited_" + today;
+  let totalKey = "visitor_total";
+  
+  let grandTotal = parseInt(localStorage.getItem(totalKey)) || 0;
   let visitedToday = localStorage.getItem(statsKey);
   
-  // Bugün ziyaret ettiyse, sayma
-  if (visitedToday) {
-    let totalKey = "visitor_grand_total";
-    let grandTotal = parseInt(localStorage.getItem(totalKey)) || 0;
-    document.getElementById("totalViews").innerText = "👀 " + grandTotal + " total people visited";
-  } else {
-    // İlk ziyaret bugün
-    let totalKey = "visitor_grand_total";
-    let grandTotal = parseInt(localStorage.getItem(totalKey)) || 0;
+  console.log("Bugün:", today);
+  console.log("Bugün ziyaret etti mi:", visitedToday);
+  console.log("Toplam:", grandTotal);
+  
+  if (!visitedToday) {
     grandTotal++;
     localStorage.setItem(totalKey, grandTotal);
-    localStorage.setItem(statsKey, "true"); // Bugün ziyaret ettiğini kaydet
-    
-    document.getElementById("totalViews").innerText = "👀 " + grandTotal + " total people visited";
+    localStorage.setItem(statsKey, "true");
+    console.log("Sayıldı! Yeni toplam:", grandTotal);
+  } else {
+    console.log("Bugün zaten sayıldı.");
   }
   
+  document.getElementById("totalViews").innerText = "👀 " + grandTotal + " total people visited";
   document.getElementById("topCountries").innerHTML = "📊 All-time counter";
 }
 
