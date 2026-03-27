@@ -451,22 +451,18 @@ for (var i = 0; i < acc.length; i++) {
 
 <script>
 let today = new Date().toDateString();
-let lastDate = localStorage.getItem('lastDate');
-let count = parseInt(localStorage.getItem('todayCount')) || 0;
+let lastDate = localStorage.getItem('lastVisitDate');
+let count = parseInt(localStorage.getItem('todayVisitCount')) || 0;
 
-// Başka gün ise reset et
+// Eğer bugün ilk defa geliyorsa +1
 if (lastDate !== today) {
-  count = 0;
-  localStorage.setItem('lastDate', today);
+  count++;
+  localStorage.setItem('todayVisitCount', count);
+  localStorage.setItem('lastVisitDate', today);
 }
 
-// Ziyaretçi ekle (1 kere)
-count++;
-localStorage.setItem('todayCount', count);
-localStorage.setItem('lastDate', today);
 document.getElementById('count').innerText = count;
 </script>
-
 
 </body>
 </html>
