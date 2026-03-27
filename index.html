@@ -446,18 +446,14 @@ for (var i = 0; i < acc.length; i++) {
 </script>
 <div style="text-align:center; margin-top:40px; padding:20px; background:#111; color:#fff; border-radius:14px; max-width:360px; margin-left:auto; margin-right:auto;">
   <h3 style="margin-bottom:10px;">🌍 Visitor Counter</h3>
-  <p id="counter" style="margin:0; font-size:16px;">👀 Loading...</p>
+  <p style="margin:0; font-size:16px;">👀 Visits: <span id="count">0</span></p>
 </div>
 
 <script>
-fetch('https://vercel.com/ozguozkul-9684s-projects/staywithoz/DZY1KAHq38Ym5wtugLTJA9gBzuxC')
-  .then(res => res.json())
-  .then(data => {
-    document.getElementById('counter').innerText = '👀 ' + data.count + ' visits';
-  })
-  .catch(e => {
-    document.getElementById('counter').innerText = '👀 Counter unavailable';
-  });
+let count = parseInt(localStorage.getItem('siteVisits')) || 0;
+count++;
+localStorage.setItem('siteVisits', count);
+document.getElementById('count').innerText = count;
 </script>
 
 
