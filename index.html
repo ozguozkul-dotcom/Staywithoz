@@ -469,21 +469,45 @@ font-family:Arial;
 
 <script>
 function loadVisitorStats() {
+  console.log("=== VISITOR STATS START ===");
+  
   let today = new Date().toDateString();
   let visitKey = "visited_" + today;
   
-  // Bugün bu tarayıcıdan ziyaret ettim mi?
+  console.log("1. Today:", today);
+  console.log("2. VisitKey:", visitKey);
+  console.log("3. Already visited today?", localStorage.getItem(visitKey));
+  
   if (!localStorage.getItem(visitKey)) {
-    // Hayır - sayıyı +1 yap
-    let count = parseInt(localStorage.getItem("total_count")) || 0;
+    console.log("4. First visit today - incrementing...");
+    
+    let count = localStorage.getItem("total_count");
+    console.log("5. Raw total_count:", count);
+    
+    count = parseInt(count) || 0;
+    console.log("6. Parsed count:", count);
+    
     count++;
-    localStorage.setItem("total_count", count);
+    console.log("7. After increment:", count);
+    
+    try {
+      localStorage.setItem("total_count", count);
+      console.log("8. Saved to localStorage");
+    } catch (e) {
+      console.error("9. SAVE ERROR:", e);
+    }
+    
     localStorage.setItem(visitKey, "true");
+    console.log("10. Set visit flag for today");
+  } else {
+    console.log("11. Already visited today - skipping increment");
   }
   
-  // Toplam göster
-  let count = parseInt(localStorage.getItem("total_count")) || 0;
-  document.getElementById("totalViews").innerText = "👀 " + count + " visits";
+  let finalCount = parseInt(localStorage.getItem("total_count")) || 0;
+  console.log("12. Final count:", finalCount);
+  console.log("=== VISITOR STATS END ===");
+  
+  document.getElementById("totalViews").innerText = "👀 " + finalCount + " visits";
   document.getElementById("topCountries").innerHTML = "📊 Counter";
 }
 
