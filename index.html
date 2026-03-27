@@ -446,13 +446,24 @@ for (var i = 0; i < acc.length; i++) {
 </script>
 <div style="text-align:center; margin-top:40px; padding:20px; background:#111; color:#fff; border-radius:14px; max-width:360px; margin-left:auto; margin-right:auto;">
   <h3 style="margin-bottom:10px;">🌍 Visitor Counter</h3>
-  <p style="margin:0; font-size:16px;">👀 Visits: <span id="count">0</span></p>
+  <p style="margin:0; font-size:16px;">👀 Today: <span id="count">0</span> visits</p>
 </div>
 
 <script>
-let count = parseInt(localStorage.getItem('siteVisits')) || 0;
+let today = new Date().toDateString();
+let lastDate = localStorage.getItem('lastDate');
+let count = parseInt(localStorage.getItem('todayCount')) || 0;
+
+// Başka gün ise reset et
+if (lastDate !== today) {
+  count = 0;
+  localStorage.setItem('lastDate', today);
+}
+
+// Ziyaretçi ekle (1 kere)
 count++;
-localStorage.setItem('siteVisits', count);
+localStorage.setItem('todayCount', count);
+localStorage.setItem('lastDate', today);
 document.getElementById('count').innerText = count;
 </script>
 
