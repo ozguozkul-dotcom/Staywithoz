@@ -468,34 +468,23 @@ font-family:Arial;
 </div>
 
 <script>
-async function loadVisitorStats() {
+function loadVisitorStats() {
   let today = new Date().toDateString();
-  let userIP = "unknown";
+  let visitKey = "visited_" + today;
   
-  // IP al
-  try {
-    const ipRes = await fetch("https://api.ipify.org?format=json");
-    const ipData = await ipRes.json();
-    userIP = ipData.ip;
-  } catch (e) {
-    // Başarısız olsa da devam et
+  // Bugün bu tarayıcıdan ziyaret ettim mi?
+  if (!localStorage.getItem(visitKey)) {
+    // Hayır - sayıyı +1 yap
+    let count = parseInt(localStorage.getItem("total_count")) || 0;
+    count++;
+    localStorage.setItem("total_count", count);
+    localStorage.setItem(visitKey, "true");
   }
   
-  // Bu gün bu IP'den ziyaret etti mi?
-  let statsKey = "visited_" + today + "_" + userIP;
-  let visitedToday = localStorage.getItem(statsKey);
-  
-  if (!visitedToday) {
-    // İlk ziyaret - toplam +1
-    let total = parseInt(localStorage.getItem("total_visitors")) || 0;
-    total++;
-    localStorage.setItem("total_visitors", total);
-    localStorage.setItem(statsKey, "true");
-  }
-  
-  let total = parseInt(localStorage.getItem("total_visitors")) || 0;
-  document.getElementById("totalViews").innerText = "👀 " + total + " people visited";
-  document.getElementById("topCountries").innerHTML = "📊 Site counter";
+  // Toplam göster
+  let count = parseInt(localStorage.getItem("total_count")) || 0;
+  document.getElementById("totalViews").innerText = "👀 " + count + " visits";
+  document.getElementById("topCountries").innerHTML = "📊 Counter";
 }
 
 loadVisitorStats();
