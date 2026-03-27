@@ -537,9 +537,10 @@ async function loadVisitorStats() {
 
     document.getElementById("topCountries").innerHTML = html;
 
-  } catch (e) {
-    document.getElementById("totalViews").innerText = "Stats unavailable";
-  }
+} catch (e) {
+     console.error("🔴 Visitor Stats Hatası:", e);
+     document.getElementById("totalViews").innerText = "Stats unavailable";
+   }
 }
 
 loadVisitorStats();
