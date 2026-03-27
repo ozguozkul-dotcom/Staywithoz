@@ -467,82 +467,9 @@ font-family:Arial;
 
 </div>
 
-<script>
-async function loadVisitorStats() {
-  try {
-    const namespace = "staywithoz_europe_2026";
-
-    // Ülke öğren
 const geoRes = await fetch("https://ip-api.com/json/");
 const geoData = await geoRes.json();
 const country = geoData.country || "Unknown";
-    const countryKey = country.replace(/\s+/g, "_");
-
-    // Toplam sayaç
-    const totalRes = await fetch(`https://api.countapi.xyz/hit/${namespace}/total`);
-    const totalData = await totalRes.json();
-
-    // Ülkeye ekle
-    await fetch(`https://api.countapi.xyz/hit/${namespace}_${countryKey}/visits`);
-
-    // 🇪🇺 AB + Avrupa ülkeleri
-    const countries = [
-      "Turkey","United States","Germany","France","Italy","Spain","Netherlands","Belgium","Austria",
-      "Poland","Sweden","Denmark","Finland","Ireland","Portugal","Greece",
-      "Czech Republic","Hungary","Romania","Bulgaria","Croatia","Slovakia","Slovenia",
-      "Estonia","Latvia","Lithuania","Luxembourg","Malta","Cyprus",
-      "United Kingdom","Norway","Switzerland","Iceland","Serbia","Ukraine",
-      "Russia","Albania","Bosnia and Herzegovina","Montenegro","North Macedonia","Brazil","Argentina"
-    ];
-
-    let results = [];
-
-    for (let c of countries) {
-      let key = c.replace(/\s+/g, "_");
-
-      let res = await fetch(`https://api.countapi.xyz/get/${namespace}_${key}/visits`);
-      let data = await res.json();
-
-      results.push({
-        name: c,
-        value: data.value ? data.value : 0
-      });
-    }
-
-    // Others hesapla
-    let knownTotal = results.reduce((sum, c) => sum + c.value, 0);
-    let others = totalData.value - knownTotal;
-
-    results.push({
-      name: "Other Countries",
-      value: others > 0 ? others : 0
-    });
-
-    // sırala
-    results.sort((a, b) => b.value - a.value);
-
-    const top3 = results.slice(0, 3);
-
-    // toplam yaz
-    document.getElementById("totalViews").innerText =
-      "👀 " + totalData.value + "+ people viewed this property";
-
-    // liste yaz
-    let html = "<b>Top Countries</b><br>";
-
-    top3.forEach((c, i) => {
-      html += `${i+1}. ${c.name} — ${c.value}<br>`;
-    });
-
-    document.getElementById("topCountries").innerHTML = html;
-
-} catch (e) {
-     console.error("🔴 Visitor Stats Error:", e.message);
-     document.getElementById("totalViews").innerText = "Stats unavailable - Error: " + e.message;
-   }
-}
-
-loadVisitorStats();
 </script>
   
 </body>
