@@ -469,32 +469,41 @@ font-family:Arial;
 
 <script>
 async function loadVisitorStats() {
-
   let today = new Date().toDateString();
   let visitKey = "visited_" + today;
-
   const namespace = "staywithoz_real_counter";
-
-  // Eğer bugün sayılmadıysa → arttır
-  if (!localStorage.getItem(visitKey)) {
-
-    await fetch(`https://api.countapi.xyz/hit/${namespace}/total`);
-
-    localStorage.setItem(visitKey, "true");
+  
+  try {
+    // Eğer bugün sayılmadıysa → arttır
+    if (!localStorage.getItem(visitKey)) {
+      try {
+        await fetch(`https://api.countapi.xyz/hit/${namespace}/total`);
+        localStorage.setItem(visitKey, "true");
+      } catch (hitError) {
+        console.error("Hit error:", hitError);
+      }
+    }
+    
+    // Toplamı çek
+    const res = await fetch(`https://api.countapi.xyz/get/${namespace}/total`);
+    
+    if (!res.ok) throw new Error("API response error: " + res.status);
+    
+    const data = await res.json();
+    let total = data.value || 0;
+    
+    document.getElementById("totalViews").innerText =
+      "👀 " + total + " people viewed this property";
+    document.getElementById("topCountries").innerHTML =
+      "📊 Live counter";
+      
+  } catch (error) {
+    console.error("loadVisitorStats error:", error);
+    document.getElementById("totalViews").innerText =
+      "👀 Counter: API unavailable";
+    document.getElementById("topCountries").innerHTML =
+      "📊 Please try again later";
   }
-
-  // Toplamı çek
-  const res = await fetch(`https://api.countapi.xyz/get/${namespace}/total`);
-  const data = await res.json();
-
-  let total = data.value || 0;
-
-  document.getElementById("totalViews").innerText =
-    "👀 " + total + " people viewed this property";
-
-  document.getElementById("topCountries").innerHTML =
-    "📊 Live counter";
-
 }
 
 loadVisitorStats();
