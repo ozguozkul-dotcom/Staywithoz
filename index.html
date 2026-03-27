@@ -468,24 +468,48 @@ font-family:Arial;
 </div>
 
 <script>
-function loadVisitorStats() {
+async function loadVisitorStats() {
   let today = new Date().toDateString();
-  let statsKey = "visitor_visited_" + today;
-  let totalKey = "visitor_total";
   
-  let grandTotal = parseInt(localStorage.getItem(totalKey)) || 0;
+  // IP adresi al
+  let userIP = "";
+  try {
+    const ipRes = await fetch("https://api.ipify.org?format=json");
+    const ipData = await ipRes.json();
+    userIP = ipData.ip;
+  } catch (e) {
+    userIP = "unknown";
+  }
+  
+  // Bugün bu IP ziyaret etti mi?
+  let statsKey = "visitor_" + today + "_" + userIP;
   let visitedToday = localStorage.getItem(statsKey);
   
+  // Global sayaçı al
+  const namespace = "staywithoz_visitors";
+  
   if (!visitedToday) {
-    grandTotal++;
-    localStorage.setItem(totalKey, grandTotal);
+    // İlk ziyaret bu gün - global sayıyı +1 yap
+    try {
+      await fetch(`https://api.countapi.xyz/hit/${namespace}/total`);
+    } catch (e) {
+      console.log("API error");
+    }
     localStorage.setItem(statsKey, "true");
   }
   
-  document.getElementById("totalViews").innerText = 
-    "👀 " + grandTotal + " people visited";
-  document.getElementById("topCountries").innerHTML = 
-    "📊 Local counter";
+  // Toplam göster
+  try {
+    const res = await fetch(`https://api.countapi.xyz/get/${namespace}/total`);
+    const data = await res.json();
+    document.getElementById("totalViews").innerText = 
+      "👀 " + data.value + " people visited (IP: " + userIP.slice(-5) + ")";
+  } catch (e) {
+    document.getElementById("totalViews").innerText = 
+      "👀 Counter unavailable";
+  }
+  
+  document.getElementById("topCountries").innerHTML = "📊 Global counter";
 }
 
 loadVisitorStats();
