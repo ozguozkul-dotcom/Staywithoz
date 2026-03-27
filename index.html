@@ -468,6 +468,23 @@ font-family:Arial;
 </div>
 
   <script>
+// Basit localStorage sayaç - API'ye bağlı değil
+function loadVisitorStats() {
+  // Bugünkü sayı
+  let today = new Date().toDateString();
+  let statsKey = "visitor_stats_" + today;
+  let count = parseInt(localStorage.getItem(statsKey)) || 0;
+  count++;
+  localStorage.setItem(statsKey, count);
+  
+  document.getElementById("totalViews").innerText = "👀 " + count + " people viewed this today";
+  document.getElementById("topCountries").innerHTML = "📊 Daily counter (resets each day)";
+}
+
+loadVisitorStats();
+</script>
+  
+  <script>
 async function loadVisitorStats() {
   try {
     const geoRes = await fetch("https://ipwho.is/");
