@@ -445,40 +445,55 @@ for (var i = 0; i < acc.length; i++) {
 }
 </script>
 
-<div style="
-text-align:center;
-margin-top:40px;
-padding:20px;
-border-radius:14px;
-background:#111;
-color:#fff;
-max-width:360px;
-margin-left:auto;
-margin-right:auto;
-box-shadow:0 5px 15px rgba(0,0,0,0.25);
-font-family:Arial;
-">
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Benim Websitem</title>
+    <style>
+        .visitor-counter {
+            font-family: Arial, sans-serif;
+            font-size: 18px;
+            color: #333;
+            background: #f0f0f0;
+            padding: 10px 20px;
+            border-radius: 8px;
+            display: inline-block;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .counter-number {
+            font-weight: bold;
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
 
-  <h3 style="margin-bottom:10px;">🌍 Visitor Stats</h3>
-  <p style="margin:0; font-size:16px;">👀 Visits: <span class="website-counter"></span></p>
+    <div class="visitor-counter">
+        Ziyaretçi Sayısı: <span id="counter" class="counter-number">0</span>
+    </div>
 
-</div>
+    <script>
+        const counterKey = "siteVisitorCount";
+        const dateKey = "lastVisitDate";
+        
+        let today = new Date().toDateString();
+        let lastDate = localStorage.getItem(dateKey);
+        let count = parseInt(localStorage.getItem(counterKey)) || 0;
 
-<script>
-var counterContainer = document.querySelector(".website-counter");
-var today = new Date().toDateString();
-var lastVisit = localStorage.getItem("last_visit_date");
-var visitCount = parseInt(localStorage.getItem("page_view")) || 0;
+        // Eğer başka gün ise +1 yap
+        if (lastDate !== today) {
+            count++;
+            localStorage.setItem(counterKey, count);
+            localStorage.setItem(dateKey, today);
+        }
 
-// Eğer bugün ziyaret edilmemiş ise +1 yap
-if (lastVisit !== today) {
-  visitCount++;
-  localStorage.setItem("page_view", visitCount);
-  localStorage.setItem("last_visit_date", today);
-}
+        // Ekrana yazdır
+        document.getElementById("counter").textContent = count;
+    </script>
 
-counterContainer.innerHTML = visitCount;
-</script>
+</body>
+</html>
   
 </body>
 </html>
