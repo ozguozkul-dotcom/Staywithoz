@@ -450,11 +450,7 @@ for (var i = 0; i < acc.length; i++) {
 </div>
 
 <script>
-const domain = window.location.hostname === 'localhost' 
-  ? 'http://localhost:3000' 
-  : window.location.origin;
-
-https://staywithoz.vercel.app/
+fetch('https://staywithoz.vercel.app/api/counter.php')
   .then(res => res.json())
   .then(data => {
     document.getElementById('counter').innerText = '👀 ' + data.count + ' visits';
