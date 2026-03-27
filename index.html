@@ -475,25 +475,34 @@ async function loadVisitorStats() {
   
   let visitedToday = localStorage.getItem(statsKey);
   
+  console.log("1. Today:", today);
+  console.log("2. Visited today:", visitedToday);
+  
   if (!visitedToday) {
-    // CountAPI'de global sayı artır
+    console.log("3. First visit - sending hit to API...");
     try {
-      await fetch(`https://api.countapi.xyz/hit/${namespace}/total`);
+      const hitRes = await fetch(`https://api.countapi.xyz/hit/${namespace}/total`);
+      const hitData = await hitRes.json();
+      console.log("4. Hit response:", hitData);
     } catch (e) {
-      console.log("API error:", e);
+      console.error("5. HIT ERROR:", e);
     }
     localStorage.setItem(statsKey, "true");
   }
   
-  // Global sayıyı oku ve göster
+  // Global sayıyı oku
   try {
+    console.log("6. Fetching total...");
     const res = await fetch(`https://api.countapi.xyz/get/${namespace}/total`);
     const data = await res.json();
+    console.log("7. GET response:", data);
+    
     document.getElementById("totalViews").innerText = 
       "👀 " + data.value + " people visited worldwide";
   } catch (e) {
+    console.error("8. GET ERROR:", e);
     document.getElementById("totalViews").innerText = 
-      "👀 Loading...";
+      "👀 Error loading counter";
   }
   
   document.getElementById("topCountries").innerHTML = "📊 Global counter";
