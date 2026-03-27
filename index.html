@@ -473,10 +473,9 @@ async function loadVisitorStats() {
     const namespace = "staywithoz_europe_2026";
 
     // Ülke öğren
-    const geoRes = await fetch("https://ipapi.co/json/");
-    const geoData = await geoRes.json();
-
-    const country = geoData.country_name || "Unknown";
+const geoRes = await fetch("https://ip-api.com/json/");
+const geoData = await geoRes.json();
+const country = geoData.country || "Unknown";
     const countryKey = country.replace(/\s+/g, "_");
 
     // Toplam sayaç
