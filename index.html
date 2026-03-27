@@ -460,22 +460,6 @@ fetch('https://staywithoz.vercel.app/api/counter.php')
   });
 </script>
 
-<script>
-const counterKey = "siteVisitorCount";
-const dateKey = "lastVisitDate";
-
-let today = new Date().toDateString();
-let lastDate = localStorage.getItem(dateKey);
-let count = parseInt(localStorage.getItem(counterKey)) || 0;
-
-if (lastDate !== today) {
-  count++;
-  localStorage.setItem(counterKey, count);
-  localStorage.setItem(dateKey, today);
-}
-
-document.getElementById("counter").textContent = count;
-</script>
 
 </body>
 </html>
