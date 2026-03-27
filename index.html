@@ -469,18 +469,31 @@ font-family:Arial;
 
 <script>
 function loadVisitorStats() {
-  let statsKey = "visitor_total";
-  let count = parseInt(localStorage.getItem(statsKey)) || 0;
-  count++;
-  localStorage.setItem(statsKey, count);
+  let today = new Date().toDateString();
+  let statsKey = "visitor_total_" + today;
+  let visitedToday = localStorage.getItem(statsKey);
   
-  document.getElementById("totalViews").innerText = "👀 " + count + " total people viewed";
+  // Bugün ziyaret ettiyse, sayma
+  if (visitedToday) {
+    let totalKey = "visitor_grand_total";
+    let grandTotal = parseInt(localStorage.getItem(totalKey)) || 0;
+    document.getElementById("totalViews").innerText = "👀 " + grandTotal + " total people visited";
+  } else {
+    // İlk ziyaret bugün
+    let totalKey = "visitor_grand_total";
+    let grandTotal = parseInt(localStorage.getItem(totalKey)) || 0;
+    grandTotal++;
+    localStorage.setItem(totalKey, grandTotal);
+    localStorage.setItem(statsKey, "true"); // Bugün ziyaret ettiğini kaydet
+    
+    document.getElementById("totalViews").innerText = "👀 " + grandTotal + " total people visited";
+  }
+  
   document.getElementById("topCountries").innerHTML = "📊 All-time counter";
 }
 
 loadVisitorStats();
 </script>
-
 loadVisitorStats();
 </script>
   
