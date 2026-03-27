@@ -476,17 +476,10 @@ function loadVisitorStats() {
   let grandTotal = parseInt(localStorage.getItem(totalKey)) || 0;
   let visitedToday = localStorage.getItem(statsKey);
   
-  console.log("Bugün:", today);
-  console.log("Bugün ziyaret etti mi:", visitedToday);
-  console.log("Toplam:", grandTotal);
-  
   if (!visitedToday) {
     grandTotal++;
     localStorage.setItem(totalKey, grandTotal);
     localStorage.setItem(statsKey, "true");
-    console.log("Sayıldı! Yeni toplam:", grandTotal);
-  } else {
-    console.log("Bugün zaten sayıldı.");
   }
   
   document.getElementById("totalViews").innerText = "👀 " + grandTotal + " total people visited";
