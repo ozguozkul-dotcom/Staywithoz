@@ -454,7 +454,7 @@ const domain = window.location.hostname === 'localhost'
   ? 'http://localhost:3000' 
   : window.location.origin;
 
-fetch(domain + '/api/counter.php')
+https://staywithoz.vercel.app/
   .then(res => res.json())
   .then(data => {
     document.getElementById('counter').innerText = '👀 ' + data.count + ' visits';
