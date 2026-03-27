@@ -444,23 +444,25 @@ for (var i = 0; i < acc.length; i++) {
   }
 }
 </script>
-
-<div style="
-text-align:center;
-margin-top:40px;
-padding:20px;
-border-radius:14px;
-background:#111;
-color:#fff;
-max-width:360px;
-margin-left:auto;
-margin-right:auto;
-box-shadow:0 5px 15px rgba(0,0,0,0.25);
-font-family:Arial;
-">
-  <h3 style="margin-bottom:10px;">🌍 Ziyaretçi Sayısı</h3>
-  <p style="margin:0; font-size:16px;">👀 <span id="counter" class="counter-number">0</span></p>
+<div style="text-align:center; margin-top:40px; padding:20px; background:#111; color:#fff; border-radius:14px; max-width:360px; margin-left:auto; margin-right:auto;">
+  <h3 style="margin-bottom:10px;">🌍 Visitor Counter</h3>
+  <p id="counter" style="margin:0; font-size:16px;">👀 Loading...</p>
 </div>
+
+<script>
+const domain = window.location.hostname === 'localhost' 
+  ? 'http://localhost:3000' 
+  : window.location.origin;
+
+fetch(domain + '/api/counter.php')
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById('counter').innerText = '👀 ' + data.count + ' visits';
+  })
+  .catch(e => {
+    document.getElementById('counter').innerText = '👀 Counter unavailable';
+  });
+</script>
 
 <script>
 const counterKey = "siteVisitorCount";
