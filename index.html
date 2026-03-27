@@ -467,15 +467,14 @@ font-family:Arial;
 
 </div>
 
- <script>
+<script>
 function loadVisitorStats() {
-  // Kalıcı sayaç - hiç sıfırlanmaz
   let statsKey = "visitor_total";
   let count = parseInt(localStorage.getItem(statsKey)) || 0;
   count++;
   localStorage.setItem(statsKey, count);
   
-  document.getElementById("totalViews").innerText = "👀 " + count + "+ total people viewed";
+  document.getElementById("totalViews").innerText = "👀 " + count + " total people viewed";
   document.getElementById("topCountries").innerHTML = "📊 All-time counter";
 }
 
