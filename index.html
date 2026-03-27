@@ -468,22 +468,35 @@ font-family:Arial;
 </div>
 
 <script>
-function loadVisitorStats() {
+async function loadVisitorStats() {
   let today = new Date().toDateString();
   let statsKey = "visitor_visited_" + today;
-  let totalKey = "visitor_total";
+  const namespace = "staywithoz_worldwide";
   
-  let grandTotal = parseInt(localStorage.getItem(totalKey)) || 0;
   let visitedToday = localStorage.getItem(statsKey);
   
   if (!visitedToday) {
-    grandTotal++;
-    localStorage.setItem(totalKey, grandTotal);
+    // CountAPI'de global sayı artır
+    try {
+      await fetch(`https://api.countapi.xyz/hit/${namespace}/total`);
+    } catch (e) {
+      console.log("API error:", e);
+    }
     localStorage.setItem(statsKey, "true");
   }
   
-  document.getElementById("totalViews").innerText = "👀 " + grandTotal + " total people visited";
-  document.getElementById("topCountries").innerHTML = "📊 All-time counter";
+  // Global sayıyı oku ve göster
+  try {
+    const res = await fetch(`https://api.countapi.xyz/get/${namespace}/total`);
+    const data = await res.json();
+    document.getElementById("totalViews").innerText = 
+      "👀 " + data.value + " people visited worldwide";
+  } catch (e) {
+    document.getElementById("totalViews").innerText = 
+      "👀 Loading...";
+  }
+  
+  document.getElementById("topCountries").innerHTML = "📊 Global counter";
 }
 
 loadVisitorStats();
