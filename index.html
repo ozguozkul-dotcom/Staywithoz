@@ -445,55 +445,39 @@ for (var i = 0; i < acc.length; i++) {
 }
 </script>
 
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <title>Benim Websitem</title>
-    <style>
-        .visitor-counter {
-            font-family: Arial, sans-serif;
-            font-size: 18px;
-            color: #333;
-            background: #f0f0f0;
-            padding: 10px 20px;
-            border-radius: 8px;
-            display: inline-block;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .counter-number {
-            font-weight: bold;
-            color: #e74c3c;
-        }
-    </style>
-</head>
-<body>
+<div style="
+text-align:center;
+margin-top:40px;
+padding:20px;
+border-radius:14px;
+background:#111;
+color:#fff;
+max-width:360px;
+margin-left:auto;
+margin-right:auto;
+box-shadow:0 5px 15px rgba(0,0,0,0.25);
+font-family:Arial;
+">
+  <h3 style="margin-bottom:10px;">🌍 Ziyaretçi Sayısı</h3>
+  <p style="margin:0; font-size:16px;">👀 <span id="counter" class="counter-number">0</span></p>
+</div>
 
-    <div class="visitor-counter">
-        Ziyaretçi Sayısı: <span id="counter" class="counter-number">0</span>
-    </div>
+<script>
+const counterKey = "siteVisitorCount";
+const dateKey = "lastVisitDate";
 
-    <script>
-        const counterKey = "siteVisitorCount";
-        const dateKey = "lastVisitDate";
-        
-        let today = new Date().toDateString();
-        let lastDate = localStorage.getItem(dateKey);
-        let count = parseInt(localStorage.getItem(counterKey)) || 0;
+let today = new Date().toDateString();
+let lastDate = localStorage.getItem(dateKey);
+let count = parseInt(localStorage.getItem(counterKey)) || 0;
 
-        // Eğer başka gün ise +1 yap
-        if (lastDate !== today) {
-            count++;
-            localStorage.setItem(counterKey, count);
-            localStorage.setItem(dateKey, today);
-        }
+if (lastDate !== today) {
+  count++;
+  localStorage.setItem(counterKey, count);
+  localStorage.setItem(dateKey, today);
+}
 
-        // Ekrana yazdır
-        document.getElementById("counter").textContent = count;
-    </script>
+document.getElementById("counter").textContent = count;
+</script>
 
-</body>
-</html>
-  
 </body>
 </html>
