@@ -451,17 +451,19 @@ for (var i = 0; i < acc.length; i++) {
 
 <script>
 let today = new Date().toDateString();
-let lastDate = localStorage.getItem('lastVisitDate');
-let count = parseInt(localStorage.getItem('todayVisitCount')) || 0;
+let savedDate = localStorage.getItem('visitDate');
+let savedCount = parseInt(localStorage.getItem('visitCount')) || 0;
 
-// Eğer bugün ilk defa geliyorsa +1
-if (lastDate !== today) {
-  count++;
-  localStorage.setItem('todayVisitCount', count);
-  localStorage.setItem('lastVisitDate', today);
+// Eğer bugün ilk ziyaret ise
+if (savedDate !== today) {
+  savedCount = 1; // Sıfırdan başla
+  localStorage.setItem('visitDate', today);
+  localStorage.setItem('visitCount', 1);
+} else {
+  // Aynı gün, sayıyı göster ama artırma!
 }
 
-document.getElementById('count').innerText = count;
+document.getElementById('count').innerText = savedCount;
 </script>
 
 </body>
