@@ -786,11 +786,27 @@ Günlük ihtiyaçlarınız için site içinde bulunan mini market yalnızca bir 
     let index = 0;
     let timer = null;
 
-    function setActive(i){
-      index = (i + slides.length) % slides.length;
-slides.forEach((s, si) => s.classList.toggle('active', si === index));
-dots.forEach((d, di) => d.setAttribute('aria-current', di === index ? 'true' : 'false'));
+   function setActive(i){
+  index = (i + slides.length) % slides.length;
+  
+  // SLIDES sınıflarını güncelle
+  slides.forEach((s, si) => {
+    if (si === index) {
+      s.classList.add('active');
+    } else {
+      s.classList.remove('active');
     }
+  });
+  
+  // DOTS aria-current güncelle
+  dots.forEach((d, di) => {
+    if (di === index) {
+      d.setAttribute('aria-current', 'true');
+    } else {
+      d.setAttribute('aria-current', 'false');
+    }
+  });
+}
 
     function start(){
       clearInterval(timer);
