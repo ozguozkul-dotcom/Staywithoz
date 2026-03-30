@@ -1,44 +1,1017 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cosy Flat Next to Beach - Kervansaray</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cosy Flat Next to Beach - Kervansaray</title>
+
+  <style>
+    .nav{
+   position:absolute;
+   top:50%;
+   transform: translateY(-50%);
+   width: 42px;
+   height: 42px;
+   border-radius: 999px;
+   border: 1px solid rgba(255,255,255,0.35);
+   background: rgba(0,0,0,0.30);
+   color: rgba(255,255,255,0.92);
+   cursor: pointer;
+   display:grid;
+   place-items:center;
+   font-size: 22px;
+   line-height: 1;
+   z-index: 5;
+}
+.nav:hover{ background: rgba(0,0,0,0.45); }
+.nav.prev{ left: 12px; }
+.nav.next{ right: 12px; }
+    :root{
+      --card: rgba(255,255,255,0.08);
+      --card2: rgba(255,255,255,0.06);
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.72);
+      --line: rgba(255,255,255,0.14);
+      --accent: #22c55e;
+      --shadow: 0 16px 40px rgba(0,0,0,0.35);
+      --radius: 18px;
+    }
+
+    *{ box-sizing: border-box; }
+    body{
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color: var(--text);
+      background:
+        radial-gradient(1000px 500px at 10% -10%, rgba(125,211,252,0.30), transparent 60%),
+        linear-gradient(180deg, #0b1220, #070b14);
+      min-height: 100vh;
+      line-height: 1.65;
+    }
+
+    .container{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 26px 16px 60px;
+    }
+
+    header{
+      padding: 16px 10px 6px;
+      margin-bottom: 12px;
+    }
+
+   .topline{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+  width: 100%;
+}
+
+    .back{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      text-decoration: none;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      transition: transform .15s ease, background .15s ease;
+      color: inherit;
+    }
+    .back:hover{ background: rgba(255,255,255,0.07); transform: translateY(-1px); }
+
+    .title{
+      font-size: clamp(26px, 4vw, 38px);
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+    .subtitle{
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .card{
+      background: linear-gradient(180deg, var(--card), var(--card2));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px;
+      margin-top: 14px;
+    }
+
+    .card h2{
+      margin: 0 0 10px;
+      font-size: 18px;
+      letter-spacing: -0.01em;
+    }
+
+    /* --- Slideshow --- */
+    .hero{
+      margin-top: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+.slider{
+  position: relative;
+  aspect-ratio: 16 / 9;
+  min-height: 200px;
+  max-height: 320px;
+  background: rgba(0,0,0,0.12);
+}
+@media (max-width: 820px){
+  .slider{
+    aspect-ratio: 4 / 3;
+    min-height: 180px;
+    max-height: 260px;
+  }
+}
+    .slide{ position:absolute; inset:0; opacity:0; transition: opacity 650ms ease; }
+    .slide.active{ opacity:1; }
+    .slide img{
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  background: rgba(0,0,0,0.25);
+  display:block;
+}
+    .dots{
+      position:absolute;
+      left: 14px; right: 14px; bottom: 12px;
+      display:flex; gap: 8px; justify-content: center;
+    }
+    .dot{
+      width: 9px; height: 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.55);
+      background: rgba(255,255,255,0.18);
+      cursor: pointer;
+      padding: 0;
+    }
+    .dot[aria-current="true"]{
+      background: rgba(125,211,252,0.85);
+      border-color: rgba(125,211,252,0.95);
+    }
+    /* --- Lightbox (enlarge) --- */
+.lightbox{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 9999;
+}
+.lightbox.open{ display: flex; }
+
+.lightbox-inner{
+  position: relative;
+  width: min(1100px, 96vw);
+  height: min(80vh, 720px);
+}
+
+.lightbox-img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  border-radius: 14px;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.14);
+}
+
+.lb-btn{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.28);
+  background: rgba(0,0,0,0.35);
+  color: rgba(255,255,255,0.92);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  line-height: 1;
+  user-select: none;
+}
+.lb-btn:hover{ background: rgba(0,0,0,0.5); }
+.lb-prev{ left: -10px; }
+.lb-next{ right: -10px; }
+
+.lb-close{
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.28);
+  background: rgba(0,0,0,0.45);
+  color: rgba(255,255,255,0.92);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+}
+.lb-close:hover{ background: rgba(0,0,0,0.6); }
+
+/* make slides clickable (zoom cursor) */
+.slide img{ cursor: zoom-in; }
+
+    /* --- Location section --- */
+    .row{
+      display: grid;
+      grid-template-columns: 1.35fr 0.65fr;
+      gap: 16px;
+      align-items: start;
+    }
+    @media (max-width: 780px){
+      .row{ grid-template-columns: 1fr; }
+    }
+
+    .kv{
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+    .kv li{
+      padding: 10px 12px;
+      border: 1px dashed rgba(255,255,255,0.16);
+      border-radius: 14px;
+      background: rgba(0,0,0,0.10);
+    }
+        .k{
+       display:block;
+          font-size: 14px;
+       font-weight: 600;
+       color: rgba(255,255,255,0.95);
+       text-transform: uppercase;
+       letter-spacing: .08em;
+     }
+    .v{
+      display:block;
+      font-size: 15px;
+      margin-top: 2px;
+    }
+
+    .mapLink{
+      display:inline-flex;
+      align-items:center;
+      text-decoration:none;
+      margin-left: 10px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(125,211,252,0.35);
+      background: rgba(125,211,252,0.10);
+      color: rgba(255,255,255,0.95);
+      white-space: nowrap;
+    }
+    .mapLink:hover{
+      background: rgba(125,211,252,0.16);
+      border-color: rgba(125,211,252,0.50);
+    }
+
+    .note{
+      margin-top: 10px;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(125,211,252,0.10);
+      color: rgba(255,255,255,0.88);
+    }
+    .note b{ color: rgba(255,255,255,0.98); }
+
+    .doorWrap{
+      padding: 12px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,0.10);
+    }
+    img.door{
+      display:block;
+      width: 100%;
+      height: auto;
+      max-width: 160px;
+      border-radius: 14px;
+      margin: 0 auto;
+    }
+
+    /* --- Rules + images --- */
+    ul.rules{
+      margin: 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .inlineMedia{
+      margin: 10px 0 0;
+      padding: 4px 8px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,0.10);
+    }
+    .inlineMedia img{
+      display:block;
+      width:100%;
+      height:auto;
+      max-width: 120px;
+      border-radius: 14px;
+      margin: 0 auto;
+      cursor: zoom-in;
+    }
+    .caption{
+      color: var(--muted);
+      font-size: 13px;
+      margin: 10px 0 0;
+      text-align: center;
+    }
+
+    .smallImagesContainer{
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin: 12px 0;
+      flex-wrap: wrap;
+    }
+    .smallImage{
+      max-width: 100px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+    }
+    .smallImage img{
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    
+    /* --- Accordion --- */
+.accordion-item{
+  margin-bottom: 20px;
+}
+
+.accordion-item.useful-section {
+  margin-bottom: 40px;
+}
+    .accordion-title{
+      width: 100%;
+      padding: 14px 18px;
+      background: linear-gradient(180deg, var(--card), var(--card2));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      color: var(--text);
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+    }
+    .accordion-title:hover{
+      background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.08));
+    }
+    .accordion-title::after{
+      content: "▼";
+      margin-left: auto;
+      transition: transform 0.3s ease;
+      font-size: 12px;
+    }
+    .accordion-title.open::after{
+      transform: rotate(-180deg);
+    }
+    .accordion-content{
+      display: none;
+      background: linear-gradient(180deg, var(--card), var(--card2));
+      border: 1px solid var(--line);
+      border-top: none;
+      border-radius: 0 0 var(--radius) var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+    .accordion-content.open{
+      display: block;
+    }
+        
+    /* --- Language Switch Buttons --- */
+    .lang-btn{
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      cursor: pointer;
+        display: inline-flex;
+  align-items: center;
+  gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+    .lang-btn:hover{
+      background: rgba(255,255,255,0.08);
+    }
+.lang-btn.active { 
+  background: #25D366 !important;
+  color: white !important;
+  border-color: #25D366 !important;
+}
+    .lang-btn .flag{
+  display: block;
+  border-radius: 4px;
+}
+  </style>
+
 </head>
+
 <body>
+  <div class="container">
     <header>
-        <h1>Cosy Flat Next to Beach - Kervansaray</h1>
+      <div class="topline">
+        <a class="back" href="index.html">
+          <span aria-hidden="true">←</span>
+         <span data-text="back-menu">Ana menüye dön</span>
+        </a>
+             <div style="display: flex; gap: 8px;">
+<button id="langTr" class="lang-btn active" type="button" title="Türkçe" aria-label="Türkçe">
+  <img class="flag" src="assets/flags/tr.svg" alt="" width="18" height="18" loading="lazy">
+  <span class="lang-label">TUR</span>
+</button>
+
+<button id="langEn" class="lang-btn" type="button" title="English" aria-label="English">
+  <img class="flag" src="assets/flags/gb.svg" alt="" width="18" height="18" loading="lazy">
+  <span class="lang-label">ENG</span>
+</button>
+</div>
+      </div>
+
+      <h1 class="title" data-text="page-title">Cosy Flat Next to Beach - Kervansaray</h1>
+     <p class="subtitle" data-text="subtitle">Evin lokasyonu, giriş bilgileri ve temel kurallar</p>
+
+      <div class="hero">
+        <div class="slider" id="slider" aria-label="Kervansaray fotoğraf slaytı">
+          <div class="slide active">
+            <img src="kervanmain1.jpg" alt="Kervansaray ana görsel">
+          </div>
+          <div class="slide">
+            <img src="kervanmain2.jpg" alt="Kervansaray görsel 2">
+          </div>
+          <div class="slide">
+            <img src="kervanmain3.jpg" alt="Kervansaray görsel 3">
+          </div>
+          <div class="slide">
+            <img src="kervanmain4.jpg" alt="Kervansaray görsel 4">
+          </div>
+          <button class="nav prev" type="button" aria-label="Önceki slayt">‹</button>
+          <button class="nav next" type="button" aria-label="Sonraki slayt">›</button>
+          <div class="dots" role="tablist" aria-label="Slayt seçimi">
+            <button class="dot" type="button" aria-label="Slayt 1" aria-current="true"></button>
+            <button class="dot" type="button" aria-label="Slayt 2" aria-current="false"></button>
+            <button class="dot" type="button" aria-label="Slayt 3" aria-current="false"></button>
+            <button class="dot" type="button" aria-label="Slayt 4" aria-current="false"></button>
+          </div>
+        </div>
+      </div>
     </header>
-    <main>
-        <section class="entry-info">
-            <h2>Welcome to the Kervansaray Flat!</h2>
-            <p>This charming flat is located just a stone's throw from the beach, perfect for a relaxing getaway.</p>
-        </section>
-        <section class="useful-info">
-            <h2>Useful Information</h2>
-            <ul>
-                <li>Check-in: 3 PM</li>
-                <li>Check-out: 11 AM</li>
-                <li>Free Wi-Fi available</li>
+
+    <!-- Location Section -->
+    <div class="accordion-item">
+      <button class="accordion-title" data-text="location-title">🏠 Evin Lokasyonu</button>
+      <div class="accordion-content">
+        <div class="row">
+          <div>
+            <ul class="kv">
+         <li>
+   <span class="k" data-text="loc-label-location">Lokasyon</span>
+  <span class="v" data-text="loc-description">Sahil başında bulunan bu daire, Kervansaray'nın en güzel konumlarından birini sunmaktadır. Deniz manzarası ve sahile kolay erişim ile tatil için ideal bir yerdir.</span>
+</li>
+              <li>
+              <span class="k" data-text="loc-label-address">Adres</span>
+                <span class="v">Kervansaray, Girne</span>
+              </li>
             </ul>
-        </section>
-        <section class="house-rules">
-            <h2>House Rules</h2>
-            <ul>
-                <li>No smoking</li>
-                <li>Pets allowed on request</li>
-                <li>Parties not allowed</li>
-            </ul>
-        </section>
-        <section class="location-description">
-            <h2>Location Details</h2>
-            <p>The Kervansaray location is perfect for beach lovers, with stunning views and easy access to local amenities.</p>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2026 Kervansaray. All rights reserved.</p>
-    </footer>
-    <script src="script.js"></script>
+
+         <h2 style="margin-top: 20px;" data-text="loc-map-title">📍 Konum</h2>
+
+            <iframe 
+              src="https://www.google.com/maps?q=Kervansaray&output=embed"
+              width="100%" 
+              height="400" 
+              style="border:0; border-radius:15px; margin-top: 10px;" 
+              allowfullscreen="" 
+              loading="lazy">
+            </iframe>
+
+            <br><br>
+
+            <a href="https://www.google.com/maps/search/?api=1&query=Kervansaray" target="_blank" 
+              style="display:inline-block; padding:10px 20px; background:black; color:white; border-radius:10px; text-decoration:none;">
+            <span data-text="loc-directions">📍 Yol Tarifi Al</span>
+            </a>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AIRPORT TRANSFER -->
+<div class="accordion-item">
+<button class="accordion-title" data-text="airport-title">
+✈️ Ercan Havalimanından Nasıl Gelirim?
+</button>
+
+<div class="accordion-content">
+
+<p data-text="airport-desc">
+Ercan Havalimanı'ndan dairemize ulaşım oldukça kolaydır. Aşağıdaki seçeneklerden birini tercih edebilirsiniz:
+</p>
+
+<h3>🚕 Taksi</h3>
+<p data-text="airport-taxi">
+Havalimanı çıkışında 7/24 taksi bulabilirsiniz.<br>
+Yolculuk yaklaşık 30 dakika sürer.
+</p>
+
+<h3>🚌 Otobüs (KIBHAS)</h3>
+<p data-text="airport-bus">
+KIBHAS otobüsleri ile Girne'ye ekonomik şekilde ulaşabilirsiniz.<br>
+Otobüs saatleri ve duraklar için aşağıdaki linke bakabilirsiniz:
+</p>
+
+<p>
+<a href="https://kibhas.org" target="_blank">
+🚌 KIBHAS resmi sitesi
+</a>
+</p>
+  <p data-text="bus-note" style="font-size:13px; opacity:0.8;">
+🚌 Otobüsle geldikten sonra kısa bir taksi yolculuğu gerekebilir
+</p>
+
+<h3>🚙 Araç Kiralama</h3>
+<p data-text="airport-car">
+Havalimanında birçok araç kiralama firması bulunmaktadır.
+</p>
+
+<h3>📍 Navigasyon</h3>
+<p>
+<a href="https://www.google.com/maps/search/?api=1&query=Kervansaray" target="_blank">
+📍 Google Maps ile yol tarifi aç
+</a>
+</p>
+
+<p style="margin-top:15px;">
+⏱️ Ortalama süre: 30 dakika<br>
+📏 Mesafe: ~30 km<br>
+</p>
+
+</div>
+</div>
+    
+    <!-- Entry Information Section -->
+    <div class="accordion-item">
+      <button class="accordion-title" data-text="entry-title">🚪 Giriş Bilgisi</button>
+      <div class="accordion-content">
+        <ul class="kv">
+           <div class="note">
+     <b data-text="entry-elevator-note-title">Asansör notu:</b> <span data-text="entry-elevator-note-text">Asansör mevcuttur, kolayca erişebilirsiniz.</span>
+            </div>
+          <li>
+           <span class="k" data-text="entry-key-where">Anahtarları Nereden Alırım</span>
+        <span class="v" data-text="entry-keybox-desc">Daireye geldiğinizde anahtarlar kapının yanındaki anahtar kutusunda olacaktır. Anahtar kutusu şifresi misafirlere ayrıca bildirilecektir.</span>
+          </li>
+        </ul>
+
+      <h2 style="margin-top: 20px;" data-text="entry-apartment-door-title">🚪 Daire Kapısı</h2>
+
+      <h2 style="margin-top: 20px;" data-text="entry-keybox-title">🔑 Anahtar Kutusu</h2>
+        <div class="inlineMedia">
+          <img src="kervankey.jpg" alt="Anahtar Kutusu">
+        <p class="caption" data-text="caption-keybox">Anahtar Kutusu</p>
+        </div>
+       <h2 data-text="entry-key-handover-title">🔑 Anahtar Teslimi</h2>
+
+<p> 
+<span data-text="entry-keybox-video-text">Aşağıdaki videodan anahtar kutusunun kolayca nasıl açılacağını izleyebilirsiniz.</span>
+</p>
+
+<div style="margin-top:20px;">
+<iframe
+  width="100%"
+  height="400"
+  src="https://www.youtube.com/embed/_0wSbHI-X6Y"
+  title="Anahtar Kutusu Kullanımı"
+  frameborder="0"
+  allowfullscreen
+  style="border-radius:15px;">
+</iframe>
+</div>
+      </div>
+    </div>
+        <!-- Useful Information Section -->
+    <div class="accordion-item useful-section">
+     <button class="accordion-title" data-text="useful-title">💡 Faydalı Bilgiler</button>
+      <div class="accordion-content">
+     <h2 style="margin-top: 0;" data-text="useful-tv-title">📺 TV</h2>
+     <p data-text="useful-tv-netflix">TV'de Netflix üyeliği vardır. Lütfen <b>"Guest"</b> kişisini seçerek oturum açınız. Herhangi bir problem yaşarsanız lütfen bize ulaşın.</p>
+     <h2 style="margin-top: 0;" data-text="useful-hotwater-title">🚿 Duşta Nasıl Sıcak Su Alırım?</h2>
+     <p data-text="useful-hotwater-text"><b>Sıcak su / duş:</b> Duşta sıcak su otomatik olarak akar, sorun yaşarsanız lütfen bize bildirin.</p>
+        <div class="inlineMedia">
+          <img src="kervanheaterplug.jpg" alt="Şofben fişi">
+       <p class="caption" data-text="caption-hotwater-plug">Su ısıtıcı fişi</p>
+        </div>
+        
+   <h2 style="margin-top: 0;" data-text="useful-wifi-title">📶 WiFi Bilgileri</h2>
+  <p data-text="useful-wifi-name">WIFI: Kervansaray</p>
+    <p data-text="useful-wifi-pass">Şifre: Misafirlere WhatsApp aracılığı ile bildirilecektir</p>
+        
+       </div>
+    </div>
+
+    <!-- House Rules Section -->
+    <div class="accordion-item">
+      <button class="accordion-title" data-text="rules-title">📋 Evin Kuralları</button>
+      <div class="accordion-content">
+        <ul class="rules">
+         <li><b data-text="rules-checkin">Giriş / Çıkış Saati:</b> <span data-text="rules-checkin-time">15:00 - 11:00</span></li>
+<li data-text="rules-smoking">Dairede sigara içilmesi kesinlikle yasaktır.</li>
+<li data-text="rules-food">Mutfakta yer alan tüm yiyecek ve içecek ücretsizdir.</li>
+<li data-text="rules-dishes">Lütfen kullandığınız bulaşıkları yıkayınız.</li>
+<li data-text="rules-towels">Kullanılan havluları ana kapının yanına yere bırakmanız rica olunur.</li>
+<li data-text="rules-sheets">Çarşaf ve battaniyeleri de kapının yanına bırakmanız rica olunur.</li>
+<li data-text="rules-no-eating">L��tfen odalarda yemek yemeyiniz.</li>
+<li data-text="rules-toilet">WC'de klozetin içine herhangi bir kağıt vs. atmayalım, bunun için çöp kovasını kullanalım.</li>
+<li data-text="rules-noise">22:00'den sonra gürültü yapmayınız.</li>
+<li data-text="rules-lock">Kapıyı giriş ve çıkışta kilitleyiniz.</li>
+<li data-text="rules-checkout">Check‑out yaptıktan sonra anahtarları anahtar kutusuna bırakıp <b>sayıları</b> karıştırınız.</li>
+<li><b data-text="rules-trash">Çöp:</b> <span data-text="rules-trash-desc">Çöpleri aşağıda bulunan çöp konteynerine atmanız rica olunur.</span></li>
+
+        <div class="inlineMedia">
+          <img id="copImg" src="kervandustbin.jpeg" alt="Çöp konteynerinin yeri">
+    <p class="caption" data-text="caption-trash">Çöpleri bu kapıyı açıp tenekeden içeri atın lütfen</p>
+        </div>
+
+      
+      </div>
+    </div>
+
+       <!-- About Location Section -->
+    <div class="accordion-item">
+      <button class="accordion-title" data-text="about-title">📍 Bu Lokasyon Hakkında</button>
+      <div class="accordion-content" style="margin-top:40px; line-height:1.6;">
+
+        <p>
+         <p data-text="about-intro">
+  Dairemiz, Girne'nin en güzel sahil bölgelerinden biri olan Kervansaray'da yer almaktadır. 
+  Deniz, kumsal ve doğa sadece birkaç adım uzaklıktadır. 
+  Hem kısa hem uzun süreli konaklamalar için ideal bir lokasyondur.
+</p>
+
+<h3 data-text="about-walking">🚶‍♂️ Yürüme Mesafesinde</h3>
+
+<ul>
+  <li data-text="about-beach">🏖️ Kumsal – 30 saniye</li>
+  <li data-text="about-restaurant">🍽️ Çeşitli restoranlar – 5 dakika</li>
+  <li data-text="about-market">🛒 Market ve dükkânlar – 10 dakika</li>
+  <li data-text="about-cafe">☕ Kafeler – 5 dakika</li>
+</ul>
+
+<h3 data-text="about-nearby">📍 Yakın Önemli Noktalar</h3>
+
+<ul>
+  <li data-text="about-girne-town">🏙️ Girne Şehir Merkezi – 5 dakika</li>
+  <li data-text="about-harbor">⛵ Girne Limanı – 10 dakika</li>
+  <li data-text="about-castle">🏰 Girne Kalesi – 15 dakika</li>
+  <li data-text="about-airport">✈️ Ercan Havalimanı – 30 dakika (arabayla)</li>
+</ul>
+
+<p data-text="about-conclusion">
+  Kervansaray'ın güzel konumu sayesinde hem şehir hayatına kolay erişim sağlayıp, hem de doğa ve deniz keyfi yaşayabilirsiniz.
+</p>
+      </div>
+    </div>
+   
+  </div>
+
+  <!-- Lightbox overlay -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lightbox-inner" role="dialog" aria-modal="true" aria-label="Fotoğraf görüntüleyici">
+      <button class="lb-close" type="button" id="lbClose" aria-label="Kapat">✕</button>
+      <button class="lb-btn lb-prev" type="button" id="lbPrev" aria-label="Önceki">‹</button>
+      <img class="lightbox-img" id="lbImg" alt="Büyük fotoğraf">
+      <button class="lb-btn lb-next" type="button" id="lbNext" aria-label="Sonraki">›</button>
+    </div>
+  </div>
+
+<script>
+  // ========== SLIDER & LIGHTBOX ==========
+  (function(){
+    const slider = document.getElementById('slider');
+    if(!slider) return;
+
+    const slides = Array.from(slider.querySelectorAll('.slide'));
+    const dots = Array.from(slider.querySelectorAll('.dot'));
+    const prevBtn = slider.querySelector('.nav.prev');
+    const nextBtn = slider.querySelector('.nav.next');
+
+    let index = 0;
+    let timer = null;
+
+    function setActive(i){
+      index = (i + slides.length) % slides.length;
+      slides.forEach((s, si) => s.classList.toggle('active', si === index));
+      dots.forEach((d, di) => d.setAttribute('aria-current', di === index ? 'true' : 'false'));
+    }
+
+    function start(){
+      clearInterval(timer);
+      timer = setInterval(() => setActive(index + 1), 3500);
+    }
+    function stop(){
+      clearInterval(timer);
+    }
+
+    dots.forEach((dot, di) => dot.addEventListener('click', () => { setActive(di); start(); }));
+    if(prevBtn) prevBtn.addEventListener('click', () => { setActive(index - 1); start(); });
+    if(nextBtn) nextBtn.addEventListener('click', () => { setActive(index + 1); start(); });
+
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbPrev = document.getElementById('lbPrev');
+    const lbNext = document.getElementById('lbNext');
+    const lbClose = document.getElementById('lbClose');
+
+    function openLightbox(){
+      if(!lightbox || !lbImg) return;
+      const activeImg = slides[index]?.querySelector('img');
+      if(activeImg) lbImg.src = activeImg.getAttribute('src');
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      stop();
+    }
+    
+    function closeLightbox(){
+      if(!lightbox) return;
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      start();
+    }
+
+    slides.forEach((s) => {
+      const img = s.querySelector('img');
+      if(img) img.addEventListener('click', openLightbox);
+    });
+
+    if(lbPrev) lbPrev.addEventListener('click', () => setActive(index - 1));
+    if(lbNext) lbNext.addEventListener('click', () => setActive(index + 1));
+    if(lbClose) lbClose.addEventListener('click', closeLightbox);
+
+    if(lightbox) lightbox.addEventListener('click', (e) => {
+      if(e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if(!lightbox || !lightbox.classList.contains('open')) return;
+      if(e.key === 'Escape') closeLightbox();
+      if(e.key === 'ArrowLeft') setActive(index - 1);
+      if(e.key === 'ArrowRight') setActive(index + 1);
+    });
+
+    slider.addEventListener('mouseenter', stop);
+    slider.addEventListener('mouseleave', start);
+    start();
+  })();
+
+  // ========== COP IMAGE LIGHTBOX ==========
+  const copImg = document.getElementById('copImg');
+  if(copImg){
+    copImg.addEventListener('click', () => {
+      const lbImg = document.getElementById('lbImg');
+      const lightbox = document.getElementById('lightbox');
+      if(lbImg && lightbox){
+        lbImg.src = copImg.src;
+        lightbox.classList.add('open');
+        lightbox.setAttribute('aria-hidden', 'false');
+      }
+    });
+  }
+
+  // ========== ACCORDION ==========
+  document.querySelectorAll('.accordion-title').forEach(btn => {
+    btn.addEventListener('click', function() {
+      this.classList.toggle('open');
+      this.nextElementSibling?.classList.toggle('open');
+    });
+  });
+
+  // ========== LANGUAGE SWITCHING ==========
+  const langData = {
+ tr: {
+  'back-menu': 'Ana menüye dön',
+  'page-title': 'Cosy Flat Next to Beach - Kervansaray',
+  'location-title': '🏠 Evin Lokasyonu',
+  'entry-title': '🚪 Giriş Bilgisi',
+  'useful-title': '💡 Faydalı Bilgiler',
+  'rules-title': '📋 Evin Kuralları',
+  'about-title': '📍 Bu Lokasyon Hakkında',
+     'subtitle': 'Evin lokasyonu, giriş bilgileri ve temel kurallar',
+
+  'loc-label-location': 'Lokasyon',
+  'loc-description': 'Sahil başında bulunan bu daire, Kervansaray\'nın en güzel konumlarından birini sunmaktadır. Deniz manzarası ve sahile kolay erişim ile tatil için ideal bir yerdir.',
+  'loc-label-address': 'Adres',
+  'loc-map-title': '📍 Konum',
+  'loc-directions': '📍 Yol Tarifi Al',
+
+  'entry-elevator-note-title': 'Asansör notu:',
+  'entry-elevator-note-text': 'Asansör mevcuttur, kolayca erişebilirsiniz.',
+  'entry-key-where': 'Anahtarları Nereden Alırım',
+  'entry-keybox-desc': 'Daireye geldiğinizde anahtarlar kapının yanındaki anahtar kutusunda olacaktır. Anahtar kutusu şifresi misafirlere ayrıca bildirilecektir.',
+  'entry-apartment-door-title': '🚪 Daire Kapısı',
+  'entry-keybox-title': '🔑 Anahtar Kutusu',
+  'caption-keybox': 'Anahtar Kutusu',
+  'entry-key-handover-title': '🔑 Anahtar Teslimi',
+  'entry-keybox-video-text': 'Aşağıdaki videodan anahtar kutusunun kolayca nasıl açılacağını izleyebilirsiniz.',
+
+  'useful-tv-title': '📺 TV',
+  'useful-tv-netflix': `TV'de Netflix üyeliği vardır. Lütfen "Guest" kişisini seçerek oturum açınız. Herhangi bir problem yaşarsanız lütfen bize ulaşın.`,
+  'useful-hotwater-title': '🚿 Duşta Nasıl Sıcak Su Alırım?',
+  'useful-hotwater-text': 'Sıcak su / duş: Duşta sıcak su otomatik olarak akar, sorun yaşarsanız lütfen bize bildirin.',
+  'caption-hotwater-plug': 'Su ısıtıcı fişi',
+  'useful-wifi-title': '📶 WiFi Bilgileri',
+  'useful-wifi-name': 'WIFI: Kervansaray',
+  'useful-wifi-pass': 'Şifre: Misafirlere WhatsApp aracılığı ile bildirilecektir',
+
+"airport-title": "✈️ Ercan Havalimanından Nasıl Gelirim?",
+"airport-desc": "Ercan Havalimanı'ndan dairemize ulaşım oldukça kolaydır. Aşağıdaki seçeneklerden birini tercih edebilirsiniz:",
+"airport-taxi": "Havalimanı çıkışında 7/24 taksi bulabilirsiniz. Yolculuk yaklaşık 30 dakika sürer.",
+"airport-bus": "KIBHAS otobüsleri ile Girne'ye ekonomik şekilde ulaşabilirsiniz. Otobüs saatleri ve duraklar için aşağıdaki linke bakabilirsiniz:",
+"airport-car": "Havalimanında birçok araç kiralama firması bulunmaktadır.",
+"bus-note": "🚌 Otobüsle geldikten sonra kısa bir taksi yolculuğu gerekebilir",
+
+  'rules-checkin': 'Giriş / Çıkış Saati:',
+  'rules-checkin-time': '15:00 - 11:00',
+  'rules-smoking': 'Dairede sigara içilmesi kesinlikle yasaktır.',
+  'rules-food': 'Mutfakta yer alan tüm yiyecek ve içecek ücretsizdir.',
+  'rules-dishes': 'Lütfen kullandığınız bulaşıkları yıkayınız.',
+  'rules-towels': 'Kullanılan havluları ana kapının yanına yere bırakmanız rica olunur.',
+  'rules-sheets': 'Çarşaf ve battaniyeleri de kapının yanına bırakmanız rica olunur.',
+  'rules-no-eating': 'Lütfen odalarda yemek yemeyiniz.',
+  'rules-toilet': 'WC\'de klozetin içine herhangi bir kağıt vs. atmayalım, bunun için çöp kovasını kullanalım.',
+  'rules-noise': '22:00\'den sonra gürültü yapmayınız.',
+  'rules-lock': 'Kapıyı giri�� ve çıkışta kilitleyiniz.',
+  'rules-checkout': 'Check‑out yaptıktan sonra anahtarları anahtar kutusuna bırakıp sayıları karıştırınız.',
+  'rules-trash': 'Çöp:',
+  'rules-trash-desc': 'Çöpleri aşağıda bulunan çöp konteynerine atmanız rica olunur.',
+  
+  'caption-trash': 'Çöpleri bu kapıyı açıp tenekeden içeri atın lütfen',
+
+  'about-intro': 'Dairemiz, Girne\'nin en güzel sahil bölgelerinden biri olan Kervansaray\'da yer almaktadır. Deniz, kumsal ve doğa sadece birkaç adım uzaklıktadır. Hem kısa hem uzun süreli konaklamalar için ideal bir lokasyondur.',
+
+  'about-walking': '🚶‍♂️ Yürüme Mesafesinde',
+  'about-beach': '🏖️ Kumsal – 30 saniye',
+  'about-restaurant': '🍽️ Çeşitli restoranlar – 5 dakika',
+  'about-market': '🛒 Market ve dükkânlar – 10 dakika',
+  'about-cafe': '☕ Kafeler – 5 dakika',
+
+  'about-nearby': '📍 Yakın Önemli Noktalar',
+  'about-girne-town': '🏙️ Girne Şehir Merkezi – 5 dakika',
+  'about-harbor': '⛵ Girne Limanı – 10 dakika',
+  'about-castle': '🏰 Girne Kalesi – 15 dakika',
+  'about-airport': '✈️ Ercan Havalimanı – 30 dakika (arabayla)',
+
+  'about-conclusion': 'Kervansaray\'nın güzel konumu sayesinde hem şehir hayatına kolay erişim sağlayıp, hem de doğa ve deniz keyfi yaşayabilirsiniz.',
+ },
+ en: {
+  'back-menu': 'Back to Main Menu',
+  'page-title': 'Cosy Flat Next to Beach - Kervansaray',
+  'location-title': '🏠 House Location',
+  'entry-title': '🚪 Entry Information',
+  'useful-title': '💡 Useful Information',
+  'rules-title': '📋 House Rules',
+  'about-title': '📍 About This Location',
+    'subtitle': 'Location, entry instructions, and house rules',
+
+  'loc-label-location': 'Location',
+  'loc-description': 'Located by the beach in Kervansaray, this apartment offers one of the most beautiful locations. Sea views and easy access to the beach make it ideal for vacation.',
+  'loc-label-address': 'Address',
+  'loc-map-title': '📍 Location',
+  'loc-directions': '📍 Get Directions',
+
+  'entry-elevator-note-title': 'Elevator note:',
+  'entry-elevator-note-text': 'Elevator is available, you can access it easily.',
+  'entry-key-where': 'Where do I get the keys?',
+  'entry-keybox-desc': 'When you arrive, the keys will be in the key lockbox next to the door. The lockbox code will be shared with guests separately.',
+  'entry-apartment-door-title': '🚪 Apartment Door',
+  'entry-keybox-title': '🔑 Key Lockbox',
+  'caption-keybox': 'Key Lockbox',
+  'entry-key-handover-title': '🔑 Key Pickup',
+  'entry-keybox-video-text': 'You can watch the video below to see how to open the lockbox easily.',
+
+  'useful-tv-title': '📺 TV',
+  'useful-tv-netflix': 'Netflix is available on the TV. Please select the "Guest" profile to sign in. If you have any issues, please contact us.',
+  'useful-hotwater-title': '🚿 How do I get hot water for the shower?',
+  'useful-hotwater-text': 'Hot water / shower: Hot water runs automatically in the shower, please contact us if you have any issues.',
+  'caption-hotwater-plug': 'Water heater plug',
+  'useful-wifi-title': '📶 Wi‑Fi Information',
+  'useful-wifi-name': 'Wi‑Fi: Kervansaray',
+  'useful-wifi-pass': 'Password: Will be shared with guests via WhatsApp',
+
+  'rules-checkin': 'Check-in / Check-out Time:',
+  'rules-checkin-time': '15:00 - 11:00',
+  'rules-smoking': 'Smoking is strictly prohibited in the apartment.',
+  'rules-food': 'All food and beverages in the kitchen are free.',
+  'rules-dishes': 'Please wash the dishes you use.',
+  'rules-towels': 'Please leave used towels on the floor near the main door.',
+  'rules-sheets': 'Please leave sheets and blankets near the door as well.',
+  'rules-no-eating': 'Please do not eat in the bedrooms.',
+  'rules-toilet': 'Do not throw any paper in the toilet; use the trash can instead.',
+  'rules-noise': 'Please do not make noise after 22:00.',
+  'rules-lock': 'Lock the door when entering and leaving.',
+  'rules-checkout': 'After checkout, leave the keys in the key lockbox and scramble the numbers.',
+  'rules-trash': 'Trash:',
+  'rules-trash-desc': 'Please throw trash in the trash containers below.',
+
+  'caption-trash': 'Please open this door and put the trash inside the bin',
+
+  'about-intro': 'Our apartment is located in Kervansaray, one of the most beautiful beach areas of Girne. The sea, beach and nature are just a few steps away. It is an ideal location for both short and long-term stays.',
+
+  'about-walking': '🚶‍♂️ Walking Distance',
+  'about-beach': '🏖️ Beach – 30 seconds',
+  'about-restaurant': '🍽️ Various restaurants – 5 minutes',
+  'about-market': '🛒 Market and shops – 10 minutes',
+  'about-cafe': '☕ Cafes – 5 minutes',
+
+  'about-nearby': '📍 Nearby Important Points',
+  'about-girne-town': '🏙️ Girne City Center – 5 minutes',
+  'about-harbor': '⛵ Girne Harbor – 10 minutes',
+  'about-castle': '🏰 Girne Castle – 15 minutes',
+  'about-airport': '✈️ Ercan Airport – 30 minutes (by car)',
+
+  'about-conclusion': 'Thanks to the beautiful location of Kervansaray, you can have easy access to city life while also enjoying nature and sea.',
+
+  "airport-title": "✈️ How to Get from the Airport",
+  "airport-desc": "Getting to the apartment from Ercan Airport is very easy. You can choose one of the options below:",
+  "airport-taxi": "You can find taxis at the airport 24/7. The journey takes around 30 minutes.",
+  "airport-bus": "You can reach Girne economically using KIBHAS buses. Check the schedule and stops from the link below:",
+  "airport-car": "There are many car rental companies at the airport.",
+  "bus-note": "🚌 After taking the bus, a short taxi ride may be required",
+ }
+  };
+
+  const langBtns = document.querySelectorAll('.lang-btn');
+  let currentLang = localStorage.getItem('lang') || 'tr';
+
+  function updatePageText(lang) {
+    document.querySelectorAll('[data-text]').forEach(el => {
+      const key = el.getAttribute('data-text');
+      if(langData[lang] && langData[lang][key]) {
+        el.textContent = langData[lang][key];
+      }
+    });
+  }
+
+ function switchLanguage(lang) {
+  if(!langData[lang]) return;
+  
+  currentLang = lang;
+  localStorage.setItem('lang', lang);
+  
+  // Update buttons
+  langBtns.forEach(btn => {
+    if(btn.id.toLowerCase() === ('lang' + lang)) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+  
+  // Update text
+  updatePageText(lang);
+  }
+
+  // Add click listeners
+  langBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const lang = this.id.replace('lang', '').toLowerCase();
+      switchLanguage(lang);
+    });
+  });
+
+  // Initialize
+  switchLanguage(currentLang);
+</script>
+
 </body>
 </html>
