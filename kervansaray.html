@@ -525,7 +525,7 @@
    </ul>
 
     <div class="inlineMedia">
-     <img src="kervanflat.jpeg" alt="Dairemiz">
+    <img id="locImg" src="kervanflat.jpeg" alt="Dairemiz">
       <p class="caption" data-text="caption-location-photo">Dairemiz</p>
       </div>
 
@@ -904,6 +904,20 @@ Günlük ihtiyaçlarınız için site içinde bulunan mini market yalnızca bir 
       }
     });
   }
+
+  // ========== LOCATION IMAGE LIGHTBOX ==========
+const locImg = document.getElementById('locImg');
+if(locImg){
+  locImg.addEventListener('click', () => {
+    const lbImg = document.getElementById('lbImg');
+    const lightbox = document.getElementById('lightbox');
+    if(lbImg && lightbox){
+      lbImg.src = locImg.src;
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden', 'false');
+    }
+  });
+}
 
 // ========== ACCORDION ==========
 document.querySelectorAll('.accordion-title').forEach(btn => {
