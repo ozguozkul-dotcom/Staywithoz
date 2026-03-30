@@ -788,7 +788,7 @@ Günlük ihtiyaçlarınız için site içinde bulunan mini market yalnızca bir 
 
     function setActive(i){
       index = (i + slides.length) % slides.length;
-slides.forEach((s, si) => s.classList[si === index ? 'add' : 'remove']('active'));
+slides.forEach((s, si) => s.classList.toggle('active', si === index));
 dots.forEach((d, di) => d.setAttribute('aria-current', di === index ? 'true' : 'false'));
     }
 
