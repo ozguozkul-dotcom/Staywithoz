@@ -865,13 +865,14 @@ Günlük ihtiyaçlarınız için site içinde bulunan mini market yalnızca bir 
     });
   }
 
-  // ========== ACCORDION ==========
-  document.querySelectorAll('.accordion-title').forEach(btn => {
-    btn.addEventListener('click', function() {
-      this.classList.toggle('open');
-      this.nextElementSibling?.classList.toggle('open');
-    });
+// ========== ACCORDION ==========
+document.querySelectorAll('.accordion-title').forEach(btn => {
+  btn.addEventListener('click', function() {
+    this.classList.toggle('open');
+    // Button'ın parent div'i bul, sonra accordion-content'i seç
+    this.parentElement.querySelector('.accordion-content')?.classList.toggle('open');
   });
+});
 
   // ========== LANGUAGE SWITCHING ==========
   const langData = {
