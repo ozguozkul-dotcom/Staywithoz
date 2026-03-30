@@ -1069,11 +1069,11 @@ For your daily needs, the mini-market within the complex is just a one-minute wa
   
   // Update buttons
   langBtns.forEach(btn => {
-    if(btn.id.toLowerCase() === ('lang' + lang)) {
-      btn.classList.add('active');
-    } else {
-      btn.classList.remove('active');
-    }
+if(btn.id === 'lang' + lang.charAt(0).toUpperCase() + lang.slice(1)) {
+  btn.classList.add('active');
+} else {
+  btn.classList.remove('active');
+}
   });
   
   // Update text
